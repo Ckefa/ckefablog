@@ -1,0 +1,45 @@
+{{ define "index" }}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Introduction to Server-Side Rendering (SSR) with golang and htmx</title>
+  <meta name="description"
+    content="Discover how Server-Side Rendering with golang and htmx can enhance web performance and user experience. Learn the basics and benefits of SSR implementation." />
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            customDark: "#13115c",
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="flex flex-col ">
+  {{ template "navbar" . }}
+
+  <main class="min-h-[90vh] pl-2">
+
+    <div class="w-[60vw]">
+      <iframe class="top-0 left-0 w-full h-[40vw]" src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+        title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen>
+      </iframe>
+    </div>
+
+  </main>
+
+  {{ template "footer" .}}
+</body>
+
+
+</html>
+{{ end }}

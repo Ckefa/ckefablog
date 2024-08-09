@@ -44,7 +44,8 @@ func main() {
 
 	e.Renderer = newTemplate()
 
-	e.GET("/", handlers.ServerSideRendering)
+	e.GET("/", handlers.HandleIndex)
+	e.GET("/golang-server-side-rendering", handlers.ServerSideRendering)
 
 	e.Logger.Fatal(e.Start(":3000"))
 }

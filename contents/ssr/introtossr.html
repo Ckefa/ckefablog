@@ -1,63 +1,48 @@
-{{ block "introtossr" . }}
+{{ define "introtossr" }}
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Introduction to Server-Side Rendering (SSR) with golang and htmx</title>
-    <meta name="description" content="Discover how Server-Side Rendering with golang and htmx can enhance web performance and user experience. Learn the basics and benefits of SSR implementation." />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        // Extend the Tailwind CSS configuration
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        customDark: '#13115c',
-                    }
-                }
-            }
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Introduction to Server-Side Rendering (SSR) with golang and htmx</title>
+  <meta name="description"
+    content="Discover how Server-Side Rendering with golang and htmx can enhance web performance and user experience. Learn the basics and benefits of SSR implementation." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // Extend the Tailwind CSS configuration
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            customDark: '#13115c',
+          }
         }
-    </script>
-  </head>
-  <body class="flex flex-col ">
-    <header class="flex justify-between pl-4 pt-2 pb-2 pr-4 text-white bg-customDark text-2xl">
-      <div>
-        CkefaBlog
-      </div>
-      <menu>
-        <ul class="flex gap-4">
-          <li>
-            Home
-          </li>
-          <li>
-          About
-          </li>
-          <li>
-          More
-          <li/>
-<form action="https://www.paypal.com/donate" method="post" target="_top">
-<input type="hidden" name="hosted_button_id" value="P4MDU3CCPVF7L" />
-<button class="bg-yellow-400 text-customDark rounded-2xl m-0"
-        name="submit" type="submit" title="PayPal - The safer, easier way to pay online!" />
-            <span class="p-2">support</span>
-</button>
-</form>
+      }
+    }
+  </script>
+</head>
 
-        </ul>
-      </menu>
+<body class="flex flex-col ">
+  {{ template "navbar" }}
 
-
-    </header>
-
-      <main class="p-2 w-[60%] text-xl ml-[6vw] leading-relaxed">
+  <main class="p-2 w-[60%] text-xl ml-[6vw] leading-relaxed">
     <h1 class="bg-gray-300 text-bold">Introduction to Server-Side Rendering (SSR) with golang and htmx</h1>
-    <p>The world of <b>web development</b> is always changing. <b>Server-Side Rendering</b> (SSR) is now a key player, offering a new way to make websites work. This article will show you why SSR is important and how to use <b>Golang</b> and <b>Htmx</b> to make your web apps better. </p>
-    <p>SSR changes how web pages are made. Instead of the browser doing the work, the server does it. This makes websites load faster, helps with <b>SEO</b>, and makes users happier. SSR sends a complete HTML page to the client, which means quicker loading times and better search engine rankings. </p>
+    <p>The world of <b>web development</b> is always changing. <b>Server-Side Rendering</b> (SSR) is now a key player,
+      offering a new way to make websites work. This article will show you why SSR is important and how to use
+      <b>Golang</b> and <b>Htmx</b> to make your web apps better.
+    </p>
+    <p>SSR changes how web pages are made. Instead of the browser doing the work, the server does it. This makes
+      websites load faster, helps with <b>SEO</b>, and makes users happier. SSR sends a complete HTML page to the
+      client, which means quicker loading times and better search engine rankings. </p>
     <img src="serverimage.jpg" alt="Server-Side Rendering" />
     <p>
-      <b>Golang</b> is a great choice for building servers because it's fast, works well with many tasks at once, and has a strong community. When you mix <b>Golang</b> with <b>Htmx</b>, a framework for making web pages, you get apps that are fast and interactive.
+      <b>Golang</b> is a great choice for building servers because it's fast, works well with many tasks at once, and
+      has a strong community. When you mix <b>Golang</b> with <b>Htmx</b>, a framework for making web pages, you get
+      apps that are fast and interactive.
     </p>
-    <p>This article will cover the basics of SSR, its benefits, and why Golang and <b>Htmx</b> are good choices for web projects. We'll show you how to set up your development space, build a simple SSR app, and use advanced techniques to make it faster and work better with <b>client-side rendering</b>. </p>
+    <p>This article will cover the basics of SSR, its benefits, and why Golang and <b>Htmx</b> are good choices for web
+      projects. We'll show you how to set up your development space, build a simple SSR app, and use advanced techniques
+      to make it faster and work better with <b>client-side rendering</b>. </p>
     <h3>Key Takeaways</h3>
     <ul>
       <li>Understand the concept of <b>Server-Side Rendering</b> and its benefits for web applications </li>
@@ -68,72 +53,126 @@
       </li>
     </ul>
     <h2>Understanding Server-Side Rendering</h2>
-    <p>In the world of <b>web development</b>, choosing between server-side rendering (SSR) and <b>client-side rendering</b> (CSR) is crucial. Server-side rendering means the server first renders the page content. Then, it sends this content to the client's web browser for display. </p>
+    <p>In the world of <b>web development</b>, choosing between server-side rendering (SSR) and <b>client-side
+        rendering</b> (CSR) is crucial. Server-side rendering means the server first renders the page content. Then, it
+      sends this content to the client's web browser for display. </p>
     <h3>What is Server-Side Rendering?</h3>
-    <p>Server-side rendering is a method where the server creates the HTML and sends it to the client. The client's web browser then shows the content. This is different from <b>client-side rendering</b>, where the client fetches and renders the content itself. </p>
+    <p>Server-side rendering is a method where the server creates the HTML and sends it to the client. The client's web
+      browser then shows the content. This is different from <b>client-side rendering</b>, where the client fetches and
+      renders the content itself. </p>
     <h3>Benefits of Server-Side Rendering</h3>
     <p>Server-side rendering has many benefits for <b>web development</b> and <b>user experience</b>: </p>
     <ul>
       <li>
-        <em>Improved initial page load times</em>: The server generates the HTML, so the client gets a fully rendered page quickly.
+        <em>Improved initial page load times</em>: The server generates the HTML, so the client gets a fully rendered
+        page quickly.
       </li>
       <li>
-        <em>Enhanced search engine optimization (SEO)</em>: Search engines can easily crawl and index server-side rendered content, making it more visible.
+        <em>Enhanced search engine optimization (SEO)</em>: Search engines can easily crawl and index server-side
+        rendered content, making it more visible.
       </li>
       <li>
-        <em>Improved accessibility</em>: Users with slow devices or internet can still access the content, as the server does the rendering.
+        <em>Improved accessibility</em>: Users with slow devices or internet can still access the content, as the server
+        does the rendering.
       </li>
       <li>
-        <em>Reduced client-side complexity</em>: The server handles the rendering, making the client-side code simpler and less taxing on devices.
+        <em>Reduced client-side complexity</em>: The server handles the rendering, making the client-side code simpler
+        and less taxing on devices.
       </li>
     </ul>
-    <p>Knowing how server-side rendering works and its benefits helps web developers. They can make better choices for creating fast, user-friendly, and <b>SEO</b>-optimized web applications. </p>
+    <p>Knowing how server-side rendering works and its benefits helps web developers. They can make better choices for
+      creating fast, user-friendly, and <b>SEO</b>-optimized web applications. </p>
     <h2>Exploring Golang and Htmx</h2>
-    <p>Golang, also known as Go, is a powerful language for server-side rendering. It was developed by Google. This language is statically typed and compiled. It has great <b>performance</b>, can handle many tasks at once, and is easy to use. These are key for making fast web applications. </p>
+    <p>Golang, also known as Go, is a powerful language for server-side rendering. It was developed by Google. This
+      language is statically typed and compiled. It has great <b>performance</b>, can handle many tasks at once, and is
+      easy to use. These are key for making fast web applications. </p>
     <h3>Why Golang for Server-Side Rendering?</h3>
-    <p>Golang is great for handling HTTP requests and working with <b>templates</b> and <b>data</b>. It's simple and can grow with your needs. This makes it easy for developers to make modern, fast web apps. </p>
-    <p>One big plus of Golang is how it handles many requests at once. It uses goroutines and channels for this. This means your system can support a lot of users without slowing down.</p>
-    <p>Golang also ensures your code is reliable and easy to keep up with thanks to its static typing. It's simple and focuses on making developers' work easier. This is why it's getting more popular in the <em>web development</em> world. </p>
-    <p>When you add Htmx, a library that makes web pages more interactive with less JavaScript, Golang becomes even better. It's perfect for making <em>server-side rendered</em> web apps that are fast and focus on <em>performance</em> and <b>user experience</b>. </p>
-    <p>https://www.youtube.com/watch?v=ndAZThvhXxs</p>
-    <blockquote>"Golang's simplicity, <b>performance</b>, and concurrency features make it an excellent choice for building high- <b>performance</b>, server-side rendered web applications." </blockquote>
+    <p>Golang is great for handling HTTP requests and working with <b>templates</b> and <b>data</b>. It's simple and can
+      grow with your needs. This makes it easy for developers to make modern, fast web apps. </p>
+    <p>One big plus of Golang is how it handles many requests at once. It uses goroutines and channels for this. This
+      means your system can support a lot of users without slowing down.</p>
+    <p>Golang also ensures your code is reliable and easy to keep up with thanks to its static typing. It's simple and
+      focuses on making developers' work easier. This is why it's getting more popular in the <em>web development</em>
+      world. </p>
+    <p>When you add Htmx, a library that makes web pages more interactive with less JavaScript, Golang becomes even
+      better. It's perfect for making <em>server-side rendered</em> web apps that are fast and focus on
+      <em>performance</em> and <b>user experience</b>.
+    </p>
+
+    <div class="container mx-auto px-4">
+      <div class="relative pb-56.25 overflow-hidden rounded-lg">
+        <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+          title="YouTube video player" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+
+    <blockquote>"Golang's simplicity, <b>performance</b>, and concurrency features make it an excellent choice for
+      building high- <b>performance</b>, server-side rendered web applications." </blockquote>
     <h2>Setting Up the Development Environment</h2>
-    <p>Before we start building our web app with Golang and Htmx, we need to set up our development <b>environment</b>. This means installing Golang, getting the tools and dependencies ready, and organizing our project. We'll walk you through the installation and make sure you have everything needed for this exciting project. </p>
+    <p>Before we start building our web app with Golang and Htmx, we need to set up our development <b>environment</b>.
+      This means installing Golang, getting the tools and dependencies ready, and organizing our project. We'll walk you
+      through the installation and make sure you have everything needed for this exciting project. </p>
     <h3>Installing Golang</h3>
-    <p>The first thing to do is download and install Golang on your computer. Golang is an open-source language that's key for our project. Visit the official Golang website to download the right version for your system. Then, follow the installation guide to set it up smoothly.</p>
+    <p>The first thing to do is download and install Golang on your computer. Golang is an open-source language that's
+      key for our project. Visit the official Golang website to download the right version for your system. Then, follow
+      the installation guide to set it up smoothly.</p>
     <h3>Configuring the Development Environment</h3>
-    <p>After installing Golang, set up your development <b>environment</b>. This includes making a <em>GOPATH</em> directory, which is the main area for your Golang projects. Use the official Golang guide to set up your GOPATH correctly and get your system ready for Golang work. </p>
+    <p>After installing Golang, set up your development <b>environment</b>. This includes making a <em>GOPATH</em>
+      directory, which is the main area for your Golang projects. Use the official Golang guide to set up your GOPATH
+      correctly and get your system ready for Golang work. </p>
     <h3>Integrating Htmx</h3>
-    <p>We'll also use Htmx, a small library that makes dynamic server-side rendering easy without needing a full SPA framework. To add Htmx, just put the Htmx script in your HTML or use a CDN to load it. The Htmx guide has all the steps to get started.</p>
-    <p>With Golang and Htmx set up, you're all set to start building your server-side rendered web app. Next, we'll look at creating the Golang server and using Htmx for client-side interactions.</p>
+    <p>We'll also use Htmx, a small library that makes dynamic server-side rendering easy without needing a full SPA
+      framework. To add Htmx, just put the Htmx script in your HTML or use a CDN to load it. The Htmx guide has all the
+      steps to get started.</p>
+    <p>With Golang and Htmx set up, you're all set to start building your server-side rendered web app. Next, we'll look
+      at creating the Golang server and using Htmx for client-side interactions.</p>
     <h2>Building a Basic Server-Side Rendered Application</h2>
-    <p>We'll look at making a simple server-side rendered web app with Golang and Htmx. First, we'll create a Golang server to render web pages. Then, we'll use Htmx to add interactivity to the pages. By the end, you'll know how to build a server-side rendered web app.</p>
+    <p>We'll look at making a simple server-side rendered web app with Golang and Htmx. First, we'll create a Golang
+      server to render web pages. Then, we'll use Htmx to add interactivity to the pages. By the end, you'll know how to
+      build a server-side rendered web app.</p>
     <h3>Creating the Golang Server</h3>
-    <p>We'll start by setting up a Golang server for our web app. Golang is great for server-side work because it's efficient, supports many platforms, and is easy to use. We'll use the <span>
+    <p>We'll start by setting up a Golang server for our web app. Golang is great for server-side work because it's
+      efficient, supports many platforms, and is easy to use. We'll use the <span>
         <em>http</em>
       </span> package to make a web server that can render HTML pages. </p>
     <h3>Implementing Htmx for Client-Side Interactivity</h3>
-    <p>After setting up the Golang server, we'll add Htmx to make our app more interactive. Htmx makes it easy to add features like dynamic updates and form submissions. This way, our app will be smooth and responsive for users.</p>
+    <p>After setting up the Golang server, we'll add Htmx to make our app more interactive. Htmx makes it easy to add
+      features like dynamic updates and form submissions. This way, our app will be smooth and responsive for users.</p>
     <img src="frog.jpg" alt="golang and htmx" />
-    <p>By the end of this section, you'll know how to make a basic server-side rendered app with Golang and Htmx. This will be a good start for learning more about server-side rendering and adding <b>dynamic content</b> later. </p>
+    <p>By the end of this section, you'll know how to make a basic server-side rendered app with Golang and Htmx. This
+      will be a good start for learning more about server-side rendering and adding <b>dynamic content</b> later. </p>
     <h2>Rendering Dynamic Content</h2>
-    <p>Server-side rendering with Golang lets us create content on the fly using <b>data</b> from different places. We'll see how to get <b>data</b> from <b>APIs</b> and add it to our server-side apps smoothly. </p>
+    <p>Server-side rendering with Golang lets us create content on the fly using <b>data</b> from different places.
+      We'll see how to get <b>data</b> from <b>APIs</b> and add it to our server-side apps smoothly. </p>
     <h3>Fetching Data from APIs</h3>
-    <p>Adding data from outside sources is key for <b>dynamic content</b>. Golang's <code>net/http</code> package makes working with <b>APIs</b> simple. We use <code>http.Get()</code> to send requests and handle the answers. </p>
-    <p>Let's say we want to show the newest news on our web page. We can ask a news API for the data, process it, and then use Golang <b>templates</b> to show it. </p>
+    <p>Adding data from outside sources is key for <b>dynamic content</b>. Golang's <code>net/http</code> package makes
+      working with <b>APIs</b> simple. We use <code>http.Get()</code> to send requests and handle the answers. </p>
+    <p>Let's say we want to show the newest news on our web page. We can ask a news API for the data, process it, and
+      then use Golang <b>templates</b> to show it. </p>
     <ol>
       <li>Send an HTTP GET request to the news API using Golang's <code>http.Get()</code> function. </li>
       <li>Parse the API response and get the important info, like article titles and URLs.</li>
       <li>Give the data to our Golang <b>templates</b>, which will show the news on the server. </li>
     </ol>
-    <p>Using <b>APIs</b> lets us make our server-side rendered sites more engaging and current. This shows how Golang and server-side rendering can make a big difference. </p>
+    <p>Using <b>APIs</b> lets us make our server-side rendered sites more engaging and current. This shows how Golang
+      and server-side rendering can make a big difference. </p>
     <blockquote>
-      <p>"Dynamically generating content from outside data is key for today's web apps. Server-side rendering with Golang makes it easy and efficient."</p>
+      <p>"Dynamically generating content from outside data is key for today's web apps. Server-side rendering with
+        Golang makes it easy and efficient."</p>
     </blockquote>
     <h2>Server-Side Rendering with Templates</h2>
-    <p>Server-side rendering (SSR) is a big deal in web development. It makes web apps dynamic and efficient. At the core, templates help separate the look of the site from its logic. We'll look at how Golang uses templates for this.</p>
-    <p>Golang has many template engines, each with its own style and features. You can use the `html/template` package or third-party ones like `Mustache` and `Pongo2. These engines let developers mix <b>dynamic content</b> into their apps smoothly. </p>
-    <p>Keeping templates organized in Golang apps is key. Developers often use a modular <b>setup</b>. They put templates in separate folders based on what they do or the pages they're for. This makes the code easier to handle and keeps it up-to-date. </p>
+    <p>Server-side rendering (SSR) is a big deal in web development. It makes web apps dynamic and efficient. At the
+      core, templates help separate the look of the site from its logic. We'll look at how Golang uses templates for
+      this.</p>
+    <p>Golang has many template engines, each with its own style and features. You can use the `html/template` package
+      or third-party ones like `Mustache` and `Pongo2. These engines let developers mix <b>dynamic content</b> into
+      their apps smoothly. </p>
+    <p>Keeping templates organized in Golang apps is key. Developers often use a modular <b>setup</b>. They put
+      templates in separate folders based on what they do or the pages they're for. This makes the code easier to handle
+      and keeps it up-to-date. </p>
     <table>
       <tr>
         <th>Template Engine</th>
@@ -160,32 +199,43 @@
         <td>Very Good</td>
       </tr>
     </table>
-    <p>Learning to use templates in Golang can unlock server-side rendering's full power. It helps make web experiences dynamic and engaging. As we move on, we'll explore how templates work with other Golang features like data fetching and performance.</p>
+    <p>Learning to use templates in Golang can unlock server-side rendering's full power. It helps make web experiences
+      dynamic and engaging. As we move on, we'll explore how templates work with other Golang features like data
+      fetching and performance.</p>
     <img src="servervirtz.jpg" alt="server-side rendering templates" />
     <h2>Optimizing Server-Side Rendering Performance</h2>
-    <p>As we dive into building our server-side rendered app, making it fast is key. We use smart <b>caching</b> and write our code well to make sure our app is quick and smooth. Let's look at how server-side and client-side <b>caching</b>, along with Golang <b>optimization</b>, can boost our app's speed. </p>
+    <p>As we dive into building our server-side rendered app, making it fast is key. We use smart <b>caching</b> and
+      write our code well to make sure our app is quick and smooth. Let's look at how server-side and client-side
+      <b>caching</b>, along with Golang <b>optimization</b>, can boost our app's speed.
+    </p>
     <h3>Caching Strategies</h3>
     <p>
-      <b>Caching</b> is a big deal for making server-side apps run faster. It stores data in memory so our app can get to it quickly. There are two main ways to cache:
+      <b>Caching</b> is a big deal for making server-side apps run faster. It stores data in memory so our app can get
+      to it quickly. There are two main ways to cache:
     </p>
     <ol>
-      <li>Server-Side Caching: Using techniques like in-memory or database caching can make our Golang server faster. It cuts down on server load and keeps often-used data ready.</li>
-      <li>Client-Side Caching: Storing rendered content in the browser can make things even quicker. Browser caching means less requests to the server, making pages load faster and giving users a better experience.</li>
+      <li>Server-Side Caching: Using techniques like in-memory or database caching can make our Golang server faster. It
+        cuts down on server load and keeps often-used data ready.</li>
+      <li>Client-Side Caching: Storing rendered content in the browser can make things even quicker. Browser caching
+        means less requests to the server, making pages load faster and giving users a better experience.</li>
     </ol>
     <h3>Code Optimization Techniques</h3>
     <p>Optimizing our Golang code is also key for a fast server-side app. Here are some ways to do it:</p>
     <ul>
       <li>
-        <em>Goroutine Optimization:</em> Using Golang's goroutines and channels can speed up tasks by doing them at the same time.
+        <em>Goroutine Optimization:</em> Using Golang's goroutines and channels can speed up tasks by doing them at the
+        same time.
       </li>
       <li>
         <em>Memory Management:</em> Managing memory well can stop leaks and make sure our app uses resources wisely.
       </li>
       <li>
-        <em>Efficient Data Structures:</em> Picking the right data structures and algorithms can make our app run smoother.
+        <em>Efficient Data Structures:</em> Picking the right data structures and algorithms can make our app run
+        smoother.
       </li>
     </ul>
-    <p>By using these caching and <b>optimization</b> tricks, we can make our server-side app fast, beautiful, and user-friendly. It will give users a top-notch experience. </p>
+    <p>By using these caching and <b>optimization</b> tricks, we can make our server-side app fast, beautiful, and
+      user-friendly. It will give users a top-notch experience. </p>
     <table>
       <tr>
         <th>Caching Technique</th>
@@ -220,34 +270,66 @@
       </tr>
     </table>
     <h2>Deploying Server-Side Rendered Applications</h2>
-    <p>Now that we've looked at server-side rendering with Golang and Htmx, it's time to deploy our web app to a production setting. We need to pick the best <b>hosting</b> platform, set up the server, and follow <b>best practices</b> for a smooth launch. This ensures our app works well and can grow as needed. </p>
-    <p>Choosing a host for our Golang app is key. <em>Golang's</em> flexibility lets it run on many cloud services like <em>Google Cloud</em>, <em>Amazon Web Services (AWS)</em>, or <em>Microsoft Azure</em>. These platforms offer scalable and reliable servers for our app. They make sure it's always available and runs fast. </p>
-    <p>We can also look at <em>self-hosted solutions</em> like <em>DigitalOcean</em> or <em>Linode</em>. These options give us more control over our server and settings. This is great if we have special needs or changes we want to make. </p>
-    <p>No matter where we host our app, setting up the server right is important. We might need to set <em>environment variables</em>, use <em>web servers</em> like <em>Nginx</em> or <em>Apache</em>, and make sure we have <em>SSL/TLS</em> certificates for secure data transfer. </p>
-    <p>For a successful <b>deployment</b>, we should use <b>best practices</b>. This includes <em>version control</em>, <em>automated build and deployment</em> pipelines, and <em>monitoring and logging</em> tools. These help keep our app stable, make updates easier, and quickly find and fix problems. </p>
-    <p>By planning and doing the <b>deployment</b> well, we make sure our users have a great experience. We also set the stage for our app to grow and stay easy to maintain over time. </p>
+    <p>Now that we've looked at server-side rendering with Golang and Htmx, it's time to deploy our web app to a
+      production setting. We need to pick the best <b>hosting</b> platform, set up the server, and follow <b>best
+        practices</b> for a smooth launch. This ensures our app works well and can grow as needed. </p>
+    <p>Choosing a host for our Golang app is key. <em>Golang's</em> flexibility lets it run on many cloud services like
+      <em>Google Cloud</em>, <em>Amazon Web Services (AWS)</em>, or <em>Microsoft Azure</em>. These platforms offer
+      scalable and reliable servers for our app. They make sure it's always available and runs fast.
+    </p>
+    <p>We can also look at <em>self-hosted solutions</em> like <em>DigitalOcean</em> or <em>Linode</em>. These options
+      give us more control over our server and settings. This is great if we have special needs or changes we want to
+      make. </p>
+    <p>No matter where we host our app, setting up the server right is important. We might need to set <em>environment
+        variables</em>, use <em>web servers</em> like <em>Nginx</em> or <em>Apache</em>, and make sure we have
+      <em>SSL/TLS</em> certificates for secure data transfer.
+    </p>
+    <p>For a successful <b>deployment</b>, we should use <b>best practices</b>. This includes <em>version control</em>,
+      <em>automated build and deployment</em> pipelines, and <em>monitoring and logging</em> tools. These help keep our
+      app stable, make updates easier, and quickly find and fix problems.
+    </p>
+    <p>By planning and doing the <b>deployment</b> well, we make sure our users have a great experience. We also set the
+      stage for our app to grow and stay easy to maintain over time. </p>
     <h2>Server-Side Rendering and SEO</h2>
-    <p>Server-side rendering (SSR) is a big help for making web apps more visible to search engines. It has many benefits that boost your app's SEO. This method of web development is a strong tool for improving your app's search engine ranking.</p>
-    <p>SSR makes web pages load faster by rendering content on the server first. Then, it sends the fully-prepared HTML to the user. This cuts down the time it takes for a page to load. Search engines like websites that load quickly because they give users a better experience.</p>
-    <p>Also, search engines can index SSR content more easily. This means they can crawl and analyze the whole page. So, your website might rank higher in search results because search engines understand your content better.</p>
+    <p>Server-side rendering (SSR) is a big help for making web apps more visible to search engines. It has many
+      benefits that boost your app's SEO. This method of web development is a strong tool for improving your app's
+      search engine ranking.</p>
+    <p>SSR makes web pages load faster by rendering content on the server first. Then, it sends the fully-prepared HTML
+      to the user. This cuts down the time it takes for a page to load. Search engines like websites that load quickly
+      because they give users a better experience.</p>
+    <p>Also, search engines can index SSR content more easily. This means they can crawl and analyze the whole page. So,
+      your website might rank higher in search results because search engines understand your content better.</p>
     <ul>
       <li>Improved page load times for better <b>user experience</b>
       </li>
       <li>Enhanced indexing by search engines for higher visibility</li>
       <li>Seamless integration with client-side rendering for a comprehensive SEO strategy</li>
     </ul>
-    <p>To make your SSR app SEO-friendly, think about using caching, optimizing images, and making your content easy to find and understand. SSR can greatly improve your web project's SEO. This means more people will visit your site.</p>
-    <blockquote>"Server-side rendering is a game-changer for web development, offering significant advantages in terms of <b>search engine optimization</b>. By combining the power of Golang and Htmx, you can create highly performant and SEO-friendly applications that will thrive in the competitive online landscape." </blockquote>
+    <p>To make your SSR app SEO-friendly, think about using caching, optimizing images, and making your content easy to
+      find and understand. SSR can greatly improve your web project's SEO. This means more people will visit your site.
+    </p>
+    <blockquote>"Server-side rendering is a game-changer for web development, offering significant advantages in terms
+      of <b>search engine optimization</b>. By combining the power of Golang and Htmx, you can create highly performant
+      and SEO-friendly applications that will thrive in the competitive online landscape." </blockquote>
     <h2>Integrating Server-Side Rendering with Client-Side Rendering</h2>
-    <p>In web development, the debate between server-side rendering (SSR) and client-side rendering (CSR) has been ongoing. SSR has many benefits, like better performance and SEO. Yet, a <b>hybrid approach</b>, mixing SSR and CSR, could be better in some cases. </p>
-    <p>Combining <em>server-side rendering</em> and <em>client-side rendering</em> creates a powerful synergy. This lets developers use the strengths of both. It makes web apps run smoothly and fast, blending server-side processing with client-side interactivity. </p>
+    <p>In web development, the debate between server-side rendering (SSR) and client-side rendering (CSR) has been
+      ongoing. SSR has many benefits, like better performance and SEO. Yet, a <b>hybrid approach</b>, mixing SSR and
+      CSR, could be better in some cases. </p>
+    <p>Combining <em>server-side rendering</em> and <em>client-side rendering</em> creates a powerful synergy. This lets
+      developers use the strengths of both. It makes web apps run smoothly and fast, blending server-side processing
+      with client-side interactivity. </p>
     <h3>Techniques for Integrating SSR and CSR</h3>
     <ol>
-      <li>Progressive Enhancement: Start with a server-side rendered base. Then, add more interactivity with client-side rendering.</li>
-      <li>Partial Hydration: Only hydrate certain parts on the client-side. This makes data transfer efficient and interactive without re-rendering the whole page.</li>
-      <li>Server-side Data Fetching: Get data on the server and send it to client-side components. This cuts down on extra API calls and boosts performance.</li>
+      <li>Progressive Enhancement: Start with a server-side rendered base. Then, add more interactivity with client-side
+        rendering.</li>
+      <li>Partial Hydration: Only hydrate certain parts on the client-side. This makes data transfer efficient and
+        interactive without re-rendering the whole page.</li>
+      <li>Server-side Data Fetching: Get data on the server and send it to client-side components. This cuts down on
+        extra API calls and boosts performance.</li>
     </ol>
-    <p>A <em>hybrid approach</em> in web development uses the best of <em>server-side rendering</em> and <em>client-side rendering</em>. This creates apps that look great, work well, and perform well for users and search engines. </p>
+    <p>A <em>hybrid approach</em> in web development uses the best of <em>server-side rendering</em> and <em>client-side
+        rendering</em>. This creates apps that look great, work well, and perform well for users and search engines.
+    </p>
     <table>
       <tr>
         <th>Approach</th>
@@ -305,18 +387,26 @@
         </td>
       </tr>
     </table>
-    <p>By thoughtfully combining <em>server-side rendering</em> and <em>client-side rendering</em>, developers can make apps that are great for users and search engines. They offer a smooth and fast experience while keeping up with SEO and performance. </p>
+    <p>By thoughtfully combining <em>server-side rendering</em> and <em>client-side rendering</em>, developers can make
+      apps that are great for users and search engines. They offer a smooth and fast experience while keeping up with
+      SEO and performance. </p>
     <h2>Conclusion</h2>
-    <p>In this article, we've explored the exciting world of server-side rendering (SSR) with Golang and Htmx. We've seen how SSR can make web apps faster, more user-friendly, and better for SEO. This journey has shown us how to build apps that perform well and give users a great experience.</p>
-    <p>Now, you know how to use Golang and Htmx in your web projects. You can render dynamic content and use templates to improve your apps. This opens up new ways to make user experiences better.</p>
-    <p>It's important to make SSR fast and efficient with caching and optimizing code. We also talked about combining server-side and client-side rendering. This approach lets you use the strengths of both to create a smooth user experience.</p>
+    <p>In this article, we've explored the exciting world of server-side rendering (SSR) with Golang and Htmx. We've
+      seen how SSR can make web apps faster, more user-friendly, and better for SEO. This journey has shown us how to
+      build apps that perform well and give users a great experience.</p>
+    <p>Now, you know how to use Golang and Htmx in your web projects. You can render dynamic content and use templates
+      to improve your apps. This opens up new ways to make user experiences better.</p>
+    <p>It's important to make SSR fast and efficient with caching and optimizing code. We also talked about combining
+      server-side and client-side rendering. This approach lets you use the strengths of both to create a smooth user
+      experience.</p>
     <section itemscope itemprop="mainEntity" itemtype="https://schema.org/FAQPage">
       <h2>FAQ</h2>
       <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
         <h3 itemprop="name">What is Server-Side Rendering (SSR)?</h3>
         <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
           <div itemprop="text">
-            <p>Server-Side Rendering (SSR) is a way to make web pages load faster. It does this by processing the page on the server first. Then, the server sends the HTML to the browser, which shows the page to the user.</p>
+            <p>Server-Side Rendering (SSR) is a way to make web pages load faster. It does this by processing the page
+              on the server first. Then, the server sends the HTML to the browser, which shows the page to the user.</p>
           </div>
         </div>
       </div>
@@ -324,7 +414,8 @@
         <h3 itemprop="name">What are the benefits of Server-Side Rendering?</h3>
         <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
           <div itemprop="text">
-            <p>SSR makes websites load faster at first, which is good for users on slow connections. It also helps with search engine rankings and makes websites work better on devices with less power.</p>
+            <p>SSR makes websites load faster at first, which is good for users on slow connections. It also helps with
+              search engine rankings and makes websites work better on devices with less power.</p>
           </div>
         </div>
       </div>
@@ -332,7 +423,9 @@
         <h3 itemprop="name">Why is Golang a good choice for Server-Side Rendering?</h3>
         <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
           <div itemprop="text">
-            <p>Golang is great for SSR because it's fast, works well with many tasks at once, and is easy to use. It's perfect for handling web requests and working with templates and data, making it ideal for SSR web apps.</p>
+            <p>Golang is great for SSR because it's fast, works well with many tasks at once, and is easy to use. It's
+              perfect for handling web requests and working with templates and data, making it ideal for SSR web apps.
+            </p>
           </div>
         </div>
       </div>
@@ -340,7 +433,8 @@
         <h3 itemprop="name">How do I set up the development environment for a Server-Side Rendered application?</h3>
         <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
           <div itemprop="text">
-            <p>First, install Golang and set up your tools and dependencies. Then, organize your project structure. This gets you ready to start building your SSR app with Golang and Htmx.</p>
+            <p>First, install Golang and set up your tools and dependencies. Then, organize your project structure. This
+              gets you ready to start building your SSR app with Golang and Htmx.</p>
           </div>
         </div>
       </div>
@@ -348,7 +442,8 @@
         <h3 itemprop="name">How do I fetch data from APIs and render it in a Server-Side Rendered application?</h3>
         <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
           <div itemprop="text">
-            <p>SSR lets you create content on the fly from data sources. You can get data from APIs and show it on the server-side. This means you can mix in external data smoothly into your Golang SSR app.</p>
+            <p>SSR lets you create content on the fly from data sources. You can get data from APIs and show it on the
+              server-side. This means you can mix in external data smoothly into your Golang SSR app.</p>
           </div>
         </div>
       </div>
@@ -356,7 +451,9 @@
         <h3 itemprop="name">How can I optimize the performance of my Server-Side Rendered application?</h3>
         <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
           <div itemprop="text">
-            <p>Improve your app's speed by using caching and optimizing code. This includes caching on the server and client, and making Golang code run faster. These steps will make your SSR app faster and more efficient.</p>
+            <p>Improve your app's speed by using caching and optimizing code. This includes caching on the server and
+              client, and making Golang code run faster. These steps will make your SSR app faster and more efficient.
+            </p>
           </div>
         </div>
       </div>
@@ -364,7 +461,9 @@
         <h3 itemprop="name">How do I deploy a Server-Side Rendered application?</h3>
         <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
           <div itemprop="text">
-            <p>Deploying a Golang SSR app means choosing the right <b>hosting</b> and setting up the server. You also need to plan for scaling and upkeep in production. This ensures your app runs smoothly and can handle more users. </p>
+            <p>Deploying a Golang SSR app means choosing the right <b>hosting</b> and setting up the server. You also
+              need to plan for scaling and upkeep in production. This ensures your app runs smoothly and can handle more
+              users. </p>
           </div>
         </div>
       </div>
@@ -372,7 +471,9 @@
         <h3 itemprop="name">How does Server-Side Rendering impact SEO?</h3>
         <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
           <div itemprop="text">
-            <p>SSR helps with SEO by making pages load quicker and easier for search engines to index. It also makes websites work better for users with slow devices. By following SEO tips, you can boost your app's visibility online.</p>
+            <p>SSR helps with SEO by making pages load quicker and easier for search engines to index. It also makes
+              websites work better for users with slow devices. By following SEO tips, you can boost your app's
+              visibility online.</p>
           </div>
         </div>
       </div>
@@ -380,12 +481,18 @@
         <h3 itemprop="name">How can I integrate Server-Side Rendering with Client-Side Rendering?</h3>
         <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
           <div itemprop="text">
-            <p>Sometimes, mixing SSR with client-side rendering works best. You can do this by smoothly transferring data between the server and client. This approach ensures a great user experience across all parts of your app.</p>
+            <p>Sometimes, mixing SSR with client-side rendering works best. You can do this by smoothly transferring
+              data between the server and client. This approach ensures a great user experience across all parts of your
+              app.</p>
           </div>
         </div>
       </div>
     </section>
-      </main>
-  </body>
+  </main>
+
+
+  {{ template "footer" . }}
+</body>
+
 </html>
 {{ end }}
