@@ -1,0 +1,14 @@
+[Unit]
+Description=Ckefa.com blog website service
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/apps/ckefablog/
+ExecStart=/apps/ckefablog/bin/app
+
+
+[Install]
+WantedBy=multi-user.target
+
