@@ -1,21 +1,44 @@
 {{ block "footer" . }}
-<footer class="bg-gray-800 text-white py-8">
+<footer class="bg-gray-800 text-white p-8">
 
-  <div class="container mx-auto px-4">
-    <div class="flex flex-col md:flex-row justify-between items-center">
-      <div class="mb-4 md:mb-0">
-        <h2 class="text-lg font-semibold">Ckefa Blog</h2>
-        <p class="text-sm">Your source for insightful articles on tech and beyond.</p>
+  <div class="flex mx-auto gap-4">
+    <div class="mb-4 md:mb-0">
+      <h2 class="text-lg font-semibold">Ckefa Blog</h2>
+      <p class="text-sm">Your source for insightful <br />on tech and beyond.</p>
+    </div>
+
+    <div>
+      <span class="font-semibold">Contacts</span>
+
+      <div class="mt-4 flex gap-4">
+        <a href="https://www.github.com/ckefa">
+          <img class="h-12 w-12" src="github.jpg" />
+        </a>
+        <a href="https://www.facebook.com/">
+          <img class="h-12 w-12" src="fb.jpg" />
+        </a>
+        <a href="https://linkedin.com/in/clintonkefa">
+          <img class="h-12 w-12" src="linkedin.jpg" />
+        </a>
+        <a href="">
+          <img class="h-12 w-12" src="xtwitter.jpg" />
+        </a>
+        <a href="">
+          <img class="h-12 w-12" src="youtube.jpg" </a>
       </div>
-      <div class="flex space-x-6 mb-4 md:mb-0">
-        <a href="#" class="hover:text-gray-400">About</a>
-        <a href="#" class="hover:text-gray-400">Contact</a>
-        <a href="#" class="hover:text-gray-400">Privacy Policy</a>
-        <a href="#" class="hover:text-gray-400">Terms of Service</a>
-      </div>
-      <div class="text-sm">
-        <p>&copy; 2024 Ckefa Blog. All rights reserved.</p>
-      </div>
+
+    </div>
+
+  </div>
+
+  <div class="mt-4 flex flex-col md:flex-row justify-between items-center">
+    <div class="flex mx-auto gap-4 mb-4 md:mb-0">
+      <a href="#" class="hover:text-gray-400">About</a>
+      <a href="#" class="hover:text-gray-400">Privacy Policy</a>
+      <a href="#" class="hover:text-gray-400">Terms of Service</a>
+    </div>
+    <div class="text-sm">
+      <p>&copy; 2024 Ckefa Blog. All rights reserved.</p>
     </div>
   </div>
 </footer>
