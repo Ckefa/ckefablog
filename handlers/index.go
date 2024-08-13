@@ -9,3 +9,7 @@ func HandleIndex(c echo.Context) error {
 func ServerSideRendering(c echo.Context) error {
 	return c.Render(200, "introtossr", nil)
 }
+
+func MentalHealth(c echo.Context) error {
+	return c.Render(200, "mental_health", nil)
+}

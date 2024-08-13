@@ -46,6 +46,7 @@ func main() {
 
 	e.GET("/", handlers.HandleIndex)
 	e.GET("/golang-server-side-rendering", handlers.ServerSideRendering)
+	e.GET("/prioritizing-mental-health", handlers.MentalHealth)
 
 	e.Logger.Fatal(e.Start(":3000"))
 }
