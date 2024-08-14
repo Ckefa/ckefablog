@@ -45,8 +45,11 @@ func main() {
 	e.Renderer = newTemplate()
 
 	e.GET("/", handlers.HandleIndex)
-	e.GET("/golang-server-side-rendering", handlers.ServerSideRendering)
-	e.GET("/prioritizing-mental-health", handlers.MentalHealth)
+
+	e.GET("/tech/golang-server-side-rendering", handlers.ServerSideRendering)
+	e.GET("/tech/googlefi", handlers.GoogleFi)
+
+	e.GET("/lifestyle/prioritizing-mental-health", handlers.MentalHealth)
 
 	e.Logger.Fatal(e.Start(":3000"))
 }

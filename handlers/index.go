@@ -10,6 +10,10 @@ func ServerSideRendering(c echo.Context) error {
 	return c.Render(200, "introtossr", nil)
 }
 
+func GoogleFi(c echo.Context) error {
+	return c.Render(200, "googlefi", nil)
+}
+
 func MentalHealth(c echo.Context) error {
 	return c.Render(200, "mental_health", nil)
 }
