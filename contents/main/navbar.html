@@ -2,13 +2,12 @@
 <header class="bg-gray-800 text-white p-4 pr-8 mb-2">
   <div class="container mx-auto flex justify-between items-center">
     <!-- Logo / Brand -->
-    <div class="flex flex-col items-center">
-      <img class="w-12 h-12 bg-gray-100 rounded-xl" src="/main/ckefa.jpg" />
-      <span>CkefaBlog</span>
+    <div class="flex items-center">
+      <img class="w-12 h-12 bg-gray-100 rounded-xl" src="/main/ckefa.jpg" alt="CkefaBlog logo" />
+      <span class="ml-3 text-lg font-bold">CkefaBlog</span>
     </div>
 
-
-    <!-- Navbar Menu Toggle (for mobile) -->
+    <!-- Navbar Menu Toggle (for small screens) -->
     <div class="md:hidden">
       <button id="menu-toggle" class="focus:outline-none">
         <svg class="w-8 h-8 text-yellow-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -33,7 +32,7 @@
         <li>
           <form action="https://www.paypal.com/donate" method="post" target="_top">
             <input type="hidden" name="hosted_button_id" value="P4MDU3CCPVF7L" />
-            <button class="bg-yellow-400 text-gray-800 rounded-2xl py-2 px-4 m-0" name="submit" type="submit"
+            <button class="bg-yellow-400 text-gray-800 rounded-2xl py-2 px-4" name="submit" type="submit"
               title="PayPal - The safer, easier way to pay online!">
               <span class="p-2">Support</span>
             </button>
@@ -42,13 +41,38 @@
       </ul>
     </menu>
   </div>
+
+  <!-- Mobile Menu (for small screens) -->
+  <menu id="mobile-menu" class="hidden flex-col gap-4 bg-gray-800 p-4 md:hidden">
+    <ul class="flex flex-col gap-4">
+      <li>
+        <a href="/" class="block text-white hover:text-yellow-400">Home</a>
+      </li>
+      <li>
+        <a href="#" class="block text-white hover:text-yellow-400">About</a>
+      </li>
+      <li>
+        <a href="#" class="block text-white hover:text-yellow-400">More</a>
+      </li>
+      <li>
+        <form action="https://www.paypal.com/donate" method="post" target="_top">
+          <input type="hidden" name="hosted_button_id" value="P4MDU3CCPVF7L" />
+          <button class="bg-yellow-400 text-gray-800 rounded-2xl py-2 px-4" name="submit" type="submit"
+            title="PayPal - The safer, easier way to pay online!">
+            <span class="p-2">Support</span>
+          </button>
+        </form>
+      </li>
+    </ul>
+  </menu>
+
 </header>
 
 <script>
-  // JavaScript for toggling menu in mobile view
+  // JavaScript for toggling the mobile menu
   document.getElementById('menu-toggle').addEventListener('click', function () {
-    var menu = document.getElementById('menu');
-    menu.classList.toggle('hidden');
+    var mobileMenu = document.getElementById('mobile-menu');
+    mobileMenu.classList.toggle('hidden');
   });
 </script>
 {{ end }}
