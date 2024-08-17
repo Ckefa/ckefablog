@@ -50,6 +50,7 @@ func main() {
 	e.GET("/tech/googlefi", handlers.GoogleFi)
 
 	e.GET("/lifestyle/prioritizing-mental-health", handlers.MentalHealth)
+	e.GET("/lifestyle/frugal-living-tips", handlers.FrugalLivingTips)
 
 	e.Logger.Fatal(e.Start(":3000"))
 }
