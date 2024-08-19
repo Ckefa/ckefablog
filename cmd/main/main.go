@@ -48,8 +48,8 @@ func main() {
 
 	e.GET("/tech/golang-server-side-rendering", handlers.ServerSideRendering)
 	e.GET("/tech/googlefi", handlers.GoogleFi)
-	e.GET("/future-of-remote-work", handlers.FutureOfRemoteWork)
-	e.GET("/ai-workplace-ethics", handlers.AiWorkplaceEthics)
+	e.GET("/tech/future-of-remote-work", handlers.FutureOfRemoteWork)
+	e.GET("/tech/ai-workplace-ethics", handlers.AiWorkplaceEthics)
 
 	e.GET("/lifestyle/prioritizing-mental-health", handlers.MentalHealth)
 	e.GET("/lifestyle/frugal-living-tips", handlers.FrugalLivingTips)
