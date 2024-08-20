@@ -2,6 +2,18 @@ package handlers
 
 import "github.com/labstack/echo/v4"
 
+func PrivacyPolicy(c echo.Context) error {
+	return c.Render(200, "privacy_policy", nil)
+}
+
+func TermsOfService(c echo.Context) error {
+	return c.Render(200, "terms_of_service", nil)
+}
+
+func About(c echo.Context) error {
+	return c.Render(200, "about", nil)
+}
+
 func HandleIndex(c echo.Context) error {
 	return c.Render(200, "index", nil)
 }

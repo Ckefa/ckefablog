@@ -46,6 +46,10 @@ func main() {
 
 	e.GET("/", handlers.HandleIndex)
 
+	e.GET("/about", handlers.About)
+	e.GET("/privacy-policy", handlers.PrivacyPolicy)
+	e.GET("/terms-of-service", handlers.TermsOfService)
+
 	e.GET("/tech/golang-server-side-rendering", handlers.ServerSideRendering)
 	e.GET("/tech/googlefi", handlers.GoogleFi)
 	e.GET("/tech/future-of-remote-work", handlers.FutureOfRemoteWork)
