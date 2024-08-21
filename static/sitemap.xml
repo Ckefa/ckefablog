@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    <!-- Home Page -->
+    <url>
+        <loc>https://www.ckefa.com/</loc>
+        <lastmod>2024-08-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    <!-- About Page -->
+    <url>
+        <loc>https://www.ckefa.com/about</loc>
+        <lastmod>2024-08-20</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Privacy Policy Page -->
+    <url>
+        <loc>https://www.ckefa.com/privacy-policy</loc>
+        <lastmod>2024-08-20</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.5</priority>
+    </url>
+
+    <!-- Terms of Service Page -->
+    <url>
+        <loc>https://www.ckefa.com/terms-of-service</loc>
+        <lastmod>2024-08-20</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.5</priority>
+    </url>
+
+    <!-- Tech Articles -->
+    <url>
+        <loc>https://www.ckefa.com/tech/golang-server-side-rendering</loc>
+        <lastmod>2024-08-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.ckefa.com/tech/googlefi</loc>
+        <lastmod>2024-08-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.ckefa.com/tech/future-of-remote-work</loc>
+        <lastmod>2024-08-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.ckefa.com/tech/ai-workplace-ethics</loc>
+        <lastmod>2024-08-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- Lifestyle Articles -->
+    <url>
+        <loc>https://www.ckefa.com/lifestyle/prioritizing-mental-health</loc>
+        <lastmod>2024-08-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.ckefa.com/lifestyle/frugal-living-tips</loc>
+        <lastmod>2024-08-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+</urlset>
