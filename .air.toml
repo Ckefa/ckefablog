@@ -14,3 +14,4 @@ includes = [
 	"contents",
 ]
 
+exclude_dirs = ["node_modules", "tmp", "bin"]

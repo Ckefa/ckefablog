@@ -1,8 +1,7 @@
 {{ block "plugin" . }}
-
 <!-- Meta Tags -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
 <!-- Google Ads -->
 <meta name="google-adsense-account" content="ca-pub-8387385583486694">
@@ -19,27 +18,12 @@
 </script>
 
 <!-- Favicon -->
-<link rel="icon" type="image/png" href="/main/ckefa.jpg" />
+<link rel="icon" type="image/png" href="/main/ckefa.jpg">
 
-<!-- Preloading Tailwind CSS for Performance Optimization -->
-<link rel="preload" href="https://cdn.tailwindcss.com" as="style">
-<script src="https://cdn.tailwindcss.com"></script>
-
-<!-- Custom Tailwind CSS Config -->
-<script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: {
-          customDark: "#13115c",
-        }
-      }
-    }
-  }
-</script>
+<!-- Custom Tailwind CSS -->
+<link href="/styles.css" rel="stylesheet">
 
 <!-- Preconnect to improve resource load times -->
 <link rel="preconnect" href="https://pagead2.googlesyndication.com">
 <link rel="preconnect" href="https://www.googletagmanager.com">
-
 {{ end }}
