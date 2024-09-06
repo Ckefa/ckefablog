@@ -21,9 +21,16 @@
 <link rel="icon" type="image/png" href="/main/ckefa.jpg">
 
 <!-- Custom Tailwind CSS -->
-<link href="/styles.css" rel="stylesheet">
+<!-- <link href="/styles.css" rel="stylesheet"> -->
+<script src="https://cdn.tailwindcss.com"></script>
 
 <!-- Preconnect to improve resource load times -->
 <link rel="preconnect" href="https://pagead2.googlesyndication.com">
 <link rel="preconnect" href="https://www.googletagmanager.com">
+{{ end }}
+
+{{ block "thanks" . }}
+<div class="bg-blue-800 p-2 mx-auto text-white">
+  Thank you For Your Effort!!
+</div>
 {{ end }}

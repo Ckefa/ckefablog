@@ -2,9 +2,13 @@ package main
 
 import (
 	"io"
+	"log"
+	"os"
 	"text/template"
 
+	"github.com/Ckefa/ckefablog.git/db"
 	"github.com/Ckefa/ckefablog.git/handlers"
+	"github.com/joho/godotenv"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )
@@ -25,17 +29,20 @@ func newTemplate() *Templates {
 
 func main() {
 	println("Starting app .....")
-	// err := godotenv.Load()
-	// if err != nil {
-	// 	log.Fatal("Unable to load environment variables")
-	// }
-	//
-	// addr := os.Getenv("laddr")
-	// if addr == "" {
-	// 	log.Fatal("Environment variable 'laddr' not set")
-	// }
-	//
-	// dsn := os.Getenv("dsn")
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Unable to load environment variables")
+	}
+
+	PORT := os.Getenv("PORT")
+	if PORT == "" {
+		log.Fatal("<<Port not Configured>>")
+	}
+
+	err = db.Init()
+	if err != nil || db.DB == nil {
+		log.Fatal("DB not initialized")
+	}
 
 	e := echo.New()
 
@@ -45,6 +52,7 @@ func main() {
 	e.Renderer = newTemplate()
 
 	e.GET("/", handlers.HandleIndex)
+	e.POST("/subscribe", handlers.Signup)
 
 	e.GET("/about", handlers.About)
 	e.GET("/privacy-policy", handlers.PrivacyPolicy)
@@ -58,5 +66,5 @@ func main() {
 	e.GET("/lifestyle/prioritizing-mental-health", handlers.MentalHealth)
 	e.GET("/lifestyle/frugal-living-tips", handlers.FrugalLivingTips)
 
-	e.Logger.Fatal(e.Start(":3000"))
+	e.Logger.Fatal(e.Start(PORT))
 }
