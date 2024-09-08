@@ -58,19 +58,5 @@
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
-
-    <!-- Lifestyle Articles -->
-    <url>
-        <loc>https://www.ckefa.com/lifestyle/prioritizing-mental-health</loc>
-        <lastmod>2024-08-20</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>https://www.ckefa.com/lifestyle/frugal-living-tips</loc>
-        <lastmod>2024-08-20</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-
+    
 </urlset>

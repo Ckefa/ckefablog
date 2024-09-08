@@ -54,17 +54,14 @@ func main() {
 	e.GET("/", handlers.HandleIndex)
 	e.POST("/subscribe", handlers.Signup)
 
-	e.GET("/about", handlers.About)
-	e.GET("/privacy-policy", handlers.PrivacyPolicy)
-	e.GET("/terms-of-service", handlers.TermsOfService)
-
 	e.GET("/tech/golang-server-side-rendering", handlers.ServerSideRendering)
 	e.GET("/tech/googlefi", handlers.GoogleFi)
 	e.GET("/tech/future-of-remote-work", handlers.FutureOfRemoteWork)
 	e.GET("/tech/ai-workplace-ethics", handlers.AiWorkplaceEthics)
 
-	e.GET("/lifestyle/prioritizing-mental-health", handlers.MentalHealth)
-	e.GET("/lifestyle/frugal-living-tips", handlers.FrugalLivingTips)
+	e.GET("/about", handlers.About)
+	e.GET("/privacy-policy", handlers.PrivacyPolicy)
+	e.GET("/terms-of-service", handlers.TermsOfService)
 
 	e.Logger.Fatal(e.Start(PORT))
 }

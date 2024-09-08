@@ -3,27 +3,27 @@
 <html lang="en">
 
 <head>
-  <title>Your go-to source for trending topics on tech, lifestyle, business and news</title>
+  <title>Your go-to source for Fullstack Development and Tech Insights</title>
 
   <!-- Meta Tags -->
   <meta name="description"
-    content="Ckefa Blog offers insightful articles on the latest in technology, innovation, lifestyle and beyond. Discover expert analysis, trends, and in-depth content tailored for tech enthusiasts and professionals." />
+    content="Ckefa Blog delivers expert analysis, tutorials, and in-depth content on full-stack development, programming languages, and the latest technology trends for developers and tech enthusiasts." />
   <meta name="keywords"
-    content="Ckefa, ckefablog, ckefa.com, trending topics, technology trends, tech gadgets, lifestyle tips, business insights, finance, startups, mental health, wellness, health trends, entrepreneurship, news articles, server-side rendering, Golang, backend, webdev, webdesign, python">
+    content="full-stack development, backend, frontend, Golang, JavaScript, webdev, web design, programming, cloud computing, server-side rendering, DevOps, API development, databases, software engineering, tech gadgets">
 
   <!-- Open Graph Tags -->
-  <meta property="og:title" content="Your go-to source for trending topics on tech, lifestyle, business and news">
+  <meta property="og:title" content="Your go-to source for Fullstack Development and Tech Insights">
   <meta property="og:description"
-    content="Discover how a digital detox can reduce stress, boost productivity, and improve your overall well-being.">
+    content="Stay updated with the latest tutorials, trends, and insights on full-stack development and technology." />
   <meta property="og:image" content="/main/ckefa.jpg"> <!-- Add a link to an image -->
   <meta property="og:url" content="https://www.ckefa.com">
   <meta property="og:type" content="homepage">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Your go-to source for trending topics on tech, lifestyle, business and news">
+  <meta name="twitter:title" content="Your go-to source for Fullstack Development and Tech Insights">
   <meta name="twitter:description"
-    content="Ckefa Blog offers insightful articles on the latest in technology, innovation, and beyond. Discover expert analysis, trends, and in-depth content tailored for tech enthusiasts and professionals.">
+    content="Ckefa Blog offers insightful articles on the latest in full-stack development, backend technologies, and more." />
   <meta name="twitter:image" content="/main/ckefa.jpg"> <!-- Add a link to an image -->
 
   <meta name="robots" content="index, follow">
@@ -35,46 +35,54 @@
   {{ template "navbar" . }}
 
   <main class="container px-3 max-w-full">
+
+    <!-- DateTime Widget -->
+    <div id="datetime-widget" class="bg-gray-100 border border-gray-300 rounded-lg text-center">
+      <h2 class="text-xl font-bold text-gray-700">Today</h2>
+      <p id="current-date" class="text-lg text-gray-600"></p>
+      <p id="current-time" class="text-2xl font-semibold text-gray-800"></p>
+    </div>
+
     <section class="bg-gray-600 text-white py-20">
       <div class="container mx-auto text-center">
-        <h1 class="text-4xl font-bold">Stay Updated with the Latest Trending Topics</h1>
-        <p class="mt-4 text-lg">Your go-to source for the latest news, technology, and lifestyle trends.</p>
+        <h1 class="text-4xl font-bold">Stay Updated with Fullstack Development and Tech Insights</h1>
+        <p class="mt-4 text-lg">Your go-to source for the latest trends in technology, programming, and development techniques.</p>
         <a href="#featured-articles"
-          class="mt-6 inline-block bg-white text-blue-600 py-2 px-4 rounded-full font-semibold">Explore Now</a>
+          class="mt-6 inline-block bg-white text-blue-600 py-2 px-4 rounded-full font-semibold">Explore Tutorials</a>
       </div>
     </section>
 
     <!-- Featured Articles -->
     <section id="featured-articles" class="container mx-auto py-16">
-      <h2 class="text-3xl font-bold mb-8 text-center">Featured Articles</h2>
+      <h2 class="text-3xl font-bold mb-8 text-center">Featured Tech Tutorials</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
 
         <article class="bg-white shadow rounded-lg overflow-hidden">
-          <img src="/tech/tech.jpg" loading="lazy" alt="Tech Image"
+          <img src="/main/golang.jpg" loading="lazy" alt="Golang Development"
             class="w-full h-auto sm:h-48 md:h-64 lg:h-80 object-cover">
           <div class="p-5">
-            <h3 class="text-2xl font-bold mb-3">Tech World</h3>
-            <p class="text-gray-700">A brief summary of the article. It covers a trending topic in technology.</p>
+            <h3 class="text-2xl font-bold mb-3">Mastering Golang for Backend Development</h3>
+            <p class="text-gray-700">In-depth tutorials on Golang backend architecture, APIs, and microservices.</p>
             <a href="#" class="text-blue-600 hover:underline mt-3 inline-block">Read More</a>
           </div>
         </article>
 
         <article class="bg-white shadow rounded-lg overflow-hidden">
-          <img src="/lifestyle/lifestyle.jpg" loading="lazy" alt="Lifestyle Image"
+          <img src="/main/js_frameworks.jpg" loading="lazy" alt="JavaScript Frameworks"
             class="w-full h-auto sm:h-48 md:h-64 lg:h-80 object-cover">
           <div class="p-5">
-            <h3 class="text-2xl font-bold mb-3">LifeStyle</h3>
-            <p class="text-gray-700">A brief summary of the article. It covers the latest in lifestyle trends.</p>
+            <h3 class="text-2xl font-bold mb-3">Exploring Popular JavaScript Frameworks</h3>
+            <p class="text-gray-700">Learn how to use React, Vue, and Svelte to build modern web applications.</p>
             <a href="#" class="text-blue-600 hover:underline mt-3 inline-block">Read More</a>
           </div>
         </article>
-
+        
         <article class="bg-white shadow rounded-lg overflow-hidden">
-          <img src="/news/news.jpg" loading="lazy" alt="News Image"
+          <img src="/main/cloud_computing.jpg" loading="lazy" alt="Cloud Deployment"
             class="w-full h-auto sm:h-48 md:h-64 lg:h-80 object-cover">
           <div class="p-5">
-            <h3 class="text-2xl font-bold mb-3">Trending News</h3>
-            <p class="text-gray-700">A brief summary of the article. It dives into a trending news story.</p>
+            <h3 class="text-2xl font-bold mb-3">Deploying Applications to the Cloud</h3>
+            <p class="text-gray-700">Step-by-step guides to deploying your web applications on AWS, GCP, and Azure.</p>
             <a href="#" class="text-blue-600 hover:underline mt-3 inline-block">Read More</a>
           </div>
         </article>
@@ -87,19 +95,19 @@
     <!-- Categories Section -->
     <section class="bg-gray-200 py-16">
       <div class="container mx-auto">
-        <h2 class="text-3xl font-bold mb-8 text-center">Explore Categories</h2>
+        <h2 class="text-3xl font-bold mb-8 text-center">Explore Development Topics</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div class="bg-white shadow rounded-lg p-5 text-center">
-            <h3 class="text-xl font-bold mb-4">Technology</h3>
-            <p class="text-gray-700">Latest updates on tech trends, gadgets, and software development.</p>
+            <h3 class="text-xl font-bold mb-4">Backend Development</h3>
+            <p class="text-gray-700">Explore tutorials and best practices for building robust backend systems.</p>
           </div>
           <div class="bg-white shadow rounded-lg p-5 text-center">
-            <h3 class="text-xl font-bold mb-4">Lifestyle</h3>
-            <p class="text-gray-700">Trending topics in health, fashion, and daily living.</p>
+            <h3 class="text-xl font-bold mb-4">Frontend Development</h3>
+            <p class="text-gray-700">Learn about the latest JavaScript frameworks, CSS techniques, and UI/UX design.</p>
           </div>
           <div class="bg-white shadow rounded-lg p-5 text-center">
-            <h3 class="text-xl font-bold mb-4">Business</h3>
-            <p class="text-gray-700">Insights into the world of finance, startups, and entrepreneurship.</p>
+            <h3 class="text-xl font-bold mb-4">Cloud and DevOps</h3>
+            <p class="text-gray-700">Get insights into cloud infrastructure, deployment strategies, and CI/CD pipelines.</p>
           </div>
         </div>
       </div>
@@ -111,25 +119,12 @@
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
         <article class="bg-white shadow rounded-lg overflow-hidden">
-          <img src="/lifestyle/nutriousbrain.jpg" loading="lazy" alt="Post Image" class="w-full">
+          <img src="/tech/servervirtz.jpg" loading="lazy" alt="Post Image" class="w-full h-auto">
           <div class="p-5">
-            <h3 class="text-2xl font-bold mb-3">Mental Health</h3>
-            <p class="text-gray-700">Prioritizing your mental health. Get tips on how to improve your mental health.</p>
-            <a href="/lifestyle/prioritizing-mental-health" class="text-blue-600 hover:underline mt-3 inline-block">
-              Read about Prioritizing Mental Health
-            </a>
-          </div>
-        </article>
-
-        <article class="bg-white shadow rounded-lg overflow-hidden">
-          <img src="/tech/servervirtz.jpg" loading="lazy" alt="Post Image" class="w-full h-[8]">
-          <div class="p-5">
-            <h3 class="text-2xl font-bold mb-3">Server Sider Rendering with Golang</h3>
-            <p class="text-gray-700">A summary of the serverside rendering.It focuses on golang server-side rendering
-              technology.</p>
-            <a href="/tech/golang-server-side-rendering" loading="lazy"
-              class="text-blue-600 hover:underline mt-3 inline-block">
-              Learn about Golang Server-Side Rendering
+            <h3 class="text-2xl font-bold mb-3">Server-Side Rendering with Go</h3>
+            <p class="text-gray-700">Explore how to implement efficient server-side rendering using Go.</p>
+            <a href="/tech/server-rendering" class="text-blue-600 hover:underline mt-3 inline-block">
+              Learn about Go Server-Side Rendering
             </a>
           </div>
         </article>
@@ -145,14 +140,30 @@
             </a>
           </div>
         </article>
+          
+        <!--     <h3 class="text-2xl font-bold mb-3">Building CI/CD Pipelines</h3> -->
+        <!--     <h3 class="text-2xl font-bold mb-3">Optimizing Golang Applications</h3> -->
       </div>
     </section>
 
   </main>
 
-  {{ template "footer" .}}
+  {{ template "footer" . }}
 </body>
 
+  <script>
+  function updateDateTime() {
+    const now = new Date();
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const date = now.toLocaleDateString('en-US', options);
+    const time = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
 
+    document.getElementById('current-date').textContent = date;
+    document.getElementById('current-time').textContent = time;
+  }
+
+  setInterval(updateDateTime, 1000); // Update every second
+  updateDateTime(); // Initial call to display immediately
+</script>
 </html>
 {{ end }}
