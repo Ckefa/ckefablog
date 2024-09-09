@@ -16,8 +16,8 @@
   <meta property="og:description"
     content="Stay updated with the latest tutorials, trends, and insights on full-stack development and technology." />
   <meta property="og:image" content="/main/ckefa.jpg"> <!-- Add a link to an image -->
-  <meta property="og:url" content="https://www.ckefa.com">
-  <meta property="og:type" content="homepage">
+  <meta property="og:url" content="https://www.ckefa.com/blog">
+  <meta property="og:type" content="blog">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
@@ -90,6 +90,43 @@
       </div>
     </section>
 
+      <section id="get-a-website" class="bg-gray-100 py-16">
+        <div class="container mx-auto px-4">
+        <div class="text-center mb-8">
+        <h2 class="text-4xl font-bold text-gray-800">Get a Website Tailored for Your Success</h2>
+        <p class="mt-4 text-lg text-gray-600">Whether you're an entrepreneur, a small business owner, or someone looking to make their online mark, our custom web solutions are designed to help you thrive in the digital world.</p>
+      </div>
+    
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+      <!-- Benefits of Having a Website -->
+      <div class="bg-white p-8 shadow rounded-lg">
+        <h3 class="text-2xl font-bold text-gray-800 mb-4">Why You Need a Website</h3>
+        <ul class="text-lg text-gray-700 space-y-4">
+          <li>✔ Establish Your Online Presence</li>
+          <li>✔ Showcase Your Products and Services</li>
+          <li>✔ Attract and Engage New Clients</li>
+          <li>✔ Improve Brand Credibility</li>
+          <li>✔ Capture Leads and Boost Sales</li>
+        </ul>
+      </div>
+
+      <!-- Link to Service Packages -->
+      <div class="bg-blue-600 p-8 shadow rounded-lg text-white text-center">
+        <h3 class="text-2xl font-bold mb-4">Ready to Get Started?</h3>
+        <p class="text-lg mb-6">Explore our affordable packages designed for businesses of all sizes. Get a custom website built with your goals in mind.</p>
+        <a href="/" class="inline-block bg-white text-blue-600 py-3 px-6 rounded-lg text-lg font-semibold hover:bg-gray-200">
+          View Our Packages
+        </a>
+      </div>
+    </div>
+
+    <div class="text-center mt-12">
+      <p class="text-gray-600 text-lg">Still have questions? <a href="#contacts" class="text-blue-600 hover:underline">Contact Us</a> for a free consultation!</p>
+    </div>
+  </div>
+</section>
+
       {{ template "subscribe" }}
 
     <!-- Categories Section -->
@@ -123,7 +160,7 @@
           <div class="p-5">
             <h3 class="text-2xl font-bold mb-3">Server-Side Rendering with Go</h3>
             <p class="text-gray-700">Explore how to implement efficient server-side rendering using Go.</p>
-            <a href="/tech/server-rendering" class="text-blue-600 hover:underline mt-3 inline-block">
+            <a href="/tech/golang-server-side-rendering" class="text-blue-600 hover:underline mt-3 inline-block">
               Learn about Go Server-Side Rendering
             </a>
           </div>
@@ -140,6 +177,16 @@
             </a>
           </div>
         </article>
+
+        <article class="bg-white shadow rounded-lg overflow-hidden">
+          <img src="/main/ai.jpg" loading="lazy" alt="Post Image" class="w-full max-h-52">
+          <div class="p-5">
+            <h3 class="text-2xl font-bold mb-3">Ai Workplace ethics:</h3>
+            <p class="text-gray-700">The Rise of AI in the Workplace: Opportunities and Challenges</p>
+            <a href="/tech/ai-workplace-ethics" class="text-blue-600 hover:underline mt-3 inline-block">Discover How AI affects the workplace environment
+            </a>
+          </div>
+        </article>
           
         <!--     <h3 class="text-2xl font-bold mb-3">Building CI/CD Pipelines</h3> -->
         <!--     <h3 class="text-2xl font-bold mb-3">Optimizing Golang Applications</h3> -->
@@ -149,6 +196,7 @@
   </main>
 
   {{ template "footer" . }}
+
 </body>
 
   <script>

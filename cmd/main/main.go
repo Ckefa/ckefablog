@@ -51,7 +51,8 @@ func main() {
 
 	e.Renderer = newTemplate()
 
-	e.GET("/", handlers.HandleIndex)
+	e.GET("/", handlers.HandleHome)
+	e.GET("/blog", handlers.HandleIndex)
 	e.POST("/subscribe", handlers.Signup)
 
 	e.GET("/tech/golang-server-side-rendering", handlers.ServerSideRendering)

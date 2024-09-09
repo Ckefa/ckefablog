@@ -1,6 +1,14 @@
 package handlers
 
-import "github.com/labstack/echo/v4"
+import (
+	"net/http"
+
+	"github.com/labstack/echo/v4"
+)
+
+func HandleHome(c echo.Context) error {
+	return c.Render(http.StatusOK, "home", nil)
+}
 
 func HandleIndex(c echo.Context) error {
 	return c.Render(200, "index", nil)
