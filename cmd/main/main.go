@@ -53,7 +53,10 @@ func main() {
 
 	e.GET("/", handlers.HandleHome)
 	e.GET("/blog", handlers.HandleIndex)
-	e.POST("/subscribe", handlers.Signup)
+	e.POST("/subscribe", handlers.Subscribe)
+
+	e.GET("/login", handlers.Login)
+	e.GET("/signup", handlers.Signup)
 
 	e.GET("/tech/golang-server-side-rendering", handlers.ServerSideRendering)
 	e.GET("/tech/googlefi", handlers.GoogleFi)

@@ -9,7 +9,7 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-func Signup(c echo.Context) error {
+func Subscribe(c echo.Context) error {
 	new_email := c.FormValue("email")
 
 	if new_email == "" {
@@ -26,4 +26,12 @@ func Signup(c echo.Context) error {
 	db.DB.Create(user)
 
 	return c.Render(200, "thanks", nil)
+}
+
+func Login(c echo.Context) error {
+	return c.Render(200, "login", nil)
+}
+
+func Signup(c echo.Context) error {
+	return c.Render(200, "signup", nil)
 }
