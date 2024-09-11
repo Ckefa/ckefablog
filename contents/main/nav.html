@@ -19,21 +19,23 @@
     <!-- Cart Icon and Profile Avatar -->
     <div class="flex items-center space-x-4 relative">
       <!-- Cart Icon (SVG) -->
-      <div class="relative inline text-white">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-4 8m4-8l1.1-5M10 21a1 1 0 001-1 1 1 0 10-2 0 1 1 0 001 1zM20 21a1 1 0 001-1 1 1 0 10-2 0 1 1 0 001 1z" />
-        </svg>
-        <!-- Item Count Badge -->
-        <span
-          class="absolute top-0 right-0 inline-block h-5 w-5 text-sm font-bold text-white bg-red-600 rounded-full text-center">0</span>
-        <!-- Cart Label -->
-        <p class="text-center font-semibold">Cart</p>
-      </div>
+      <a href="/checkout">
+        <div class="relative inline text-white">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-4 8m4-8l1.1-5M10 21a1 1 0 001-1 1 1 0 10-2 0 1 1 0 001 1zM20 21a1 1 0 001-1 1 1 0 10-2 0 1 1 0 001 1z" />
+          </svg>
+          <!-- Item Count Badge -->
+          <span
+            class="absolute top-0 right-0 inline-block h-5 w-5 text-sm font-bold text-white bg-red-600 rounded-full text-center">0</span>
+          <!-- Cart Label -->
+          <p class="text-center font-semibold">Cart</p>
+        </div>
+      </a>
 
       <!-- Profile Avatar and Dropdown -->
       <div class="relative group">
-
         <!-- Avatar SVG -->
         <div class="relative">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" viewBox="0 0 32 32">
@@ -53,7 +55,7 @@
         </svg>
 
         <!-- Dropdown Menu -->
-        <div class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg hidden group-hover:block">
+        <div class="absolute right-0 w-48 bg-white rounded-lg shadow-lg hidden group-hover:block">
           <a href="/login" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Login</a>
           <a href="/logout" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Logout</a>
         </div>

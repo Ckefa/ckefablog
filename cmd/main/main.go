@@ -8,6 +8,7 @@ import (
 
 	"github.com/Ckefa/ckefablog.git/db"
 	"github.com/Ckefa/ckefablog.git/handlers"
+	"github.com/Ckefa/ckefablog.git/paypal"
 	"github.com/joho/godotenv"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -39,6 +40,7 @@ func main() {
 		log.Fatal("<<Port not Configured>>")
 	}
 
+	paypal.InitPayment()
 	err = db.Init()
 	if err != nil || db.DB == nil {
 		log.Fatal("DB not initialized")
@@ -57,6 +59,10 @@ func main() {
 
 	e.GET("/login", handlers.Login)
 	e.GET("/signup", handlers.Signup)
+
+	e.GET("/checkout", handlers.Checkout)
+	e.GET("/order/confirm/:id", handlers.ConfirmOrder)
+	e.GET("/oder/cancel/:id", handlers.CancelOrder)
 
 	e.GET("/tech/golang-server-side-rendering", handlers.ServerSideRendering)
 	e.GET("/tech/googlefi", handlers.GoogleFi)
