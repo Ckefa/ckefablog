@@ -1,0 +1,17 @@
+[build]
+root = "."
+bin = "./tmp/app"
+cmd = "go build -o ./tmp/app ./cmd/main/main.go"
+delay = 1000
+
+[dev]
+cmd = "./temp/app"
+delay = 1000
+
+[watch]
+includes = [
+	"cmd",
+	"contents",
+]
+
+exclude_dirs = ["node_modules", "tmp", "bin"]

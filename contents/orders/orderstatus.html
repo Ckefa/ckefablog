@@ -1,0 +1,78 @@
+{{ define "order_status" }}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Order Status</title>
+	<script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100">
+
+	<!-- Page Container -->
+	<div class="container mx-auto mt-10">
+		<div class="bg-white rounded-lg shadow-md p-8 max-w-lg mx-auto">
+			<!-- Order Status Card -->
+
+			<div class="flex justify-between items-center mb-6">
+				<h2 class="text-2xl font-semibold text-gray-800">Order Status</h2>
+				<span class="bg-green-100 text-green-600 text-sm font-semibold py-1 px-3 rounded">
+					{{.status}}
+				</span>
+			</div>
+
+			<!-- Order ID -->
+			<div class="mb-4">
+				<p class="text-sm font-semibold text-gray-600">Order ID:</p>
+				<!-- <p class="text-lg text-gray-800">{{.order.ID}}</p> -->
+			</div>
+
+			<!-- Amount -->
+			<div class="mb-4">
+				<p class="text-sm font-semibold text-gray-600">Amount:</p>
+				<p class="text-lg text-gray-800">{{index .order.PurchaseUnits 0 "Amount" "Value"}}
+					{{index .order.PurchaseUnits 0 "Amount" "CurrencyCode"}}</p>
+			</div>
+
+			<!-- Shipping Address -->
+			<div class="mb-4">
+				<p class="text-sm font-semibold text-gray-600">Shipping Address:</p>
+				<p class="text-lg text-gray-800">
+					{{index .order.PurchaseUnits 0 "Shipping" "Address" "AddressLine1"}},<br>
+					{{index .order.PurchaseUnits 0 "Shipping" "Address" "AdminArea2"}},<br>
+					{{index .order.PurchaseUnits 0 "Shipping" "Address" "AdminArea1"}} -
+					{{index .order.PurchaseUnits 0 "Shipping" "Address" "PostalCode"}},<br>
+					{{index .order.PurchaseUnits 0 "Shipping" "Address" "CountryCode"}}
+				</p>
+			</div>
+
+			<!-- Payment Information -->
+			<div class="mb-4">
+				<p class="text-sm font-semibold text-gray-600">Payment Method:</p>
+				<p class="text-lg text-gray-800">PayPal</p>
+			</div>
+
+			<!-- Buttons for Order Actions -->
+			<div class="mt-6 flex justify-between">
+				<a href="/"
+					class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded shadow">
+					Continue Shopping
+				</a>
+				<a href="https://www.ckefa.com/order/cancel/{{.order.ID}}"
+					class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded shadow">
+					Cancel Order
+				</a>
+			</div>
+
+		</div>
+	</div>
+
+</body>
+
+</html>
+
+
+{{ end }}

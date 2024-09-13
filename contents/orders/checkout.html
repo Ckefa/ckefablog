@@ -1,0 +1,53 @@
+{{ define "checkout" }}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Checkout Page</title>
+	<script src="https://cdn.tailwindcss.com"></script>
+
+	<script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID"></script>
+</head>
+
+<body class="bg-gray-100">
+	<div class="container mx-auto mt-10">
+		<div class="flex flex-col lg:flex-row justify-between">
+
+			<!-- Left Column: Order Summary -->
+			<div class="lg:w-1/2 p-6 bg-white rounded-lg shadow-lg mb-10 lg:mb-0">
+				<h2 class="text-2xl font-semibold mb-6">Order Summary</h2>
+
+				<!-- Package Item -->
+				<div class="flex justify-between mb-4">
+					<div class="flex items-center">
+						<img src="https://via.placeholder.com/80" alt="Package Image"
+							class="w-20 h-20 rounded-lg mr-4">
+						<div>
+							<h3 class="text-lg font-semibold">Pro Web Development Package
+							</h3>
+							<p class="text-gray-500">Includes full website setup and SEO.
+							</p>
+						</div>
+					</div>
+					<span class="text-lg font-bold">$500</span>
+				</div>
+
+				<!-- Total Price -->
+				<div class="border-t mt-6 pt-4 flex justify-between">
+					<span class="font-semibold">Total</span>
+					<span class="text-lg font-bold">$500</span>
+				</div>
+			</div>
+			<!-- Right Column: Payment Form -->
+
+			<!-- PayPal SDK Script -->
+
+		</div>
+	</div>
+
+</body>
+
+</html>
+{{ end }}

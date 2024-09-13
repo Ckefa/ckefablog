@@ -1,0 +1,18 @@
+{
+  "name": "ckefablog",
+  "version": "1.0.0",
+  "description": "blogging website",
+  "main": "index.js",
+  "scripts": {
+    "build:css": "npx postcss static/post.css -o static/styles.css",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "clinton kefa",
+  "license": "ISC",
+  "dependencies": {
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.41",
+    "postcss-cli": "^11.0.0",
+    "tailwindcss": "^3.4.10"
+  }
+}
