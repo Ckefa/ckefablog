@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/Ckefa/ckefablog/db"
@@ -10,7 +11,22 @@ import (
 )
 
 func Checkout(c echo.Context) error {
-	return c.Render(200, "checkout", nil)
+	pid := c.Param("pid")
+
+	var pack models.Package
+
+	if err := db.DB.Where("id = ?", pid).First(&pack).Error; err != nil {
+		return c.JSON(http.StatusAccepted, map[string]string{"message": "no package selected"})
+	}
+	log.Println("Checking out package ", pack.Name)
+
+	packData := map[string]interface{}{
+		"name":    pack.Name,
+		"price":   pack.Price,
+		"details": models.OrderDetails[int(pack.ID)],
+	}
+
+	return c.Render(http.StatusOK, "checkout", packData)
 }
 
 func RequestOrder(c echo.Context) error {

@@ -8,45 +8,110 @@
 	<title>Checkout Page</title>
 	<script src="https://cdn.tailwindcss.com"></script>
 
-	<script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID"></script>
+	<link href="/styles.css" rel="stylesheet">
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-gray-50">
 	<div class="container mx-auto mt-10">
-		<div class="flex flex-col lg:flex-row justify-between">
+		<div class="flex flex-col lg:flex-row justify-between items-start">
 
 			<!-- Left Column: Order Summary -->
-			<div class="lg:w-1/2 p-6 bg-white rounded-lg shadow-lg mb-10 lg:mb-0">
-				<h2 class="text-2xl font-semibold mb-6">Order Summary</h2>
+			<div class="lg:w-1/2 p-8 bg-white rounded-lg shadow-lg mb-10 lg:mb-0">
+				<h2 class="text-3xl font-semibold text-gray-700 mb-4">Order Summary</h2>
 
-				<!-- Package Item -->
-				<div class="flex justify-between mb-4">
-					<div class="flex items-center">
-						<img src="https://via.placeholder.com/80" alt="Package Image"
-							class="w-20 h-20 rounded-lg mr-4">
-						<div>
-							<h3 class="text-lg font-semibold">Pro Web Development Package
-							</h3>
-							<p class="text-gray-500">Includes full website setup and SEO.
-							</p>
-						</div>
-					</div>
-					<span class="text-lg font-bold">$500</span>
+				<!-- Package Selection Dropdown -->
+				<div class="mb-4">
+					<label for="package-select"
+						class="block text-lg font-medium text-gray-600 mb-2">Select
+						Package:</label>
+					<select id="package-select"
+						class="w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-3"
+						onchange="redirectToPackage()">
+						<option value="/checkout/1" {{ if eq .id 1 }}selected{{ end }}>{{ .name
+							}}</option>
+						<option value="/checkout/2" {{ if eq .id 2 }}selected{{ end }}>Basic
+							Package</option>
+						<option value="/checkout/3" {{ if eq .id 3 }}selected{{ end }}>Standard
+							Package</option>
+						<option value="/checkout/4" {{ if eq .id 4 }}selected{{ end }}>Premium
+							Package</option>
+					</select>
 				</div>
 
-				<!-- Total Price -->
-				<div class="border-t mt-6 pt-4 flex justify-between">
-					<span class="font-semibold">Total</span>
-					<span class="text-lg font-bold">$500</span>
+				<div class="flex justify-between items-center mb-2">
+					<span class="text-lg font-medium text-gray-600">Package</span>
+					<span class="text-lg font-bold text-gray-900">{{ .name }}</span>
+				</div>
+				<div class="flex justify-between items-center mb-2">
+					<span class="text-lg font-medium text-gray-600">Cost</span>
+					<span class="text-lg text-green-600 font-bold">${{ .price }}</span>
+				</div>
+
+				<div class="mb-4">
+					<span class="text-lg font-medium text-gray-600">This package will cover:</span>
+					<ul class="list-disc list-inside mt-2 text-gray-700">
+						{{ range .details }}
+						<li>{{ . }}</li>
+						{{ end }}
+					</ul>
 				</div>
 			</div>
-			<!-- Right Column: Payment Form -->
 
-			<!-- PayPal SDK Script -->
+			<!-- Right Column: Payment Form -->
+			<div class="lg:w-1/2 p-8 bg-white rounded-lg shadow-lg" id="checkout-form">
+				<h2 class="text-3xl font-semibold text-gray-700 mb-6">Payment Information</h2>
+				<form action="/pay" method="POST" class="space-y-4">
+					<div>
+						<label for="card-holder"
+							class="block text-sm font-medium text-gray-700">Card Holder
+							Name</label>
+						<input type="text" id="card-holder" name="card_holder"
+							class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-3"
+							placeholder="John Doe" required>
+					</div>
+					<div>
+						<label for="card-number"
+							class="block text-sm font-medium text-gray-700">Card
+							Number</label>
+						<input type="text" id="card-number" name="card_number"
+							class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-3"
+							placeholder="1234 5678 9012 3456" required>
+					</div>
+					<div class="flex space-x-4">
+						<div class="w-1/2">
+							<label for="expiry-date"
+								class="block text-sm font-medium text-gray-700">Expiry
+								Date</label>
+							<input type="text" id="expiry-date" name="expiry_date"
+								class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-3"
+								placeholder="MM/YY" required>
+						</div>
+						<div class="w-1/2">
+							<label for="cvc"
+								class="block text-sm font-medium text-gray-700">CVC</label>
+							<input type="text" id="cvc" name="cvc"
+								class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-3"
+								placeholder="123" required>
+						</div>
+					</div>
+					<div class="mt-6">
+						<button type="submit"
+							class="w-full bg-green-600 text-white py-3 rounded-lg shadow-lg hover:bg-green-700 transition">Complete
+							Payment</button>
+					</div>
+				</form>
+			</div>
 
 		</div>
 	</div>
 
+	<!-- JavaScript to redirect based on package selection -->
+	<script>
+		function redirectToPackage() {
+			var packageUrl = document.getElementById('package-select').value;
+			window.location.href = packageUrl;
+		}
+	</script>
 </body>
 
 </html>
