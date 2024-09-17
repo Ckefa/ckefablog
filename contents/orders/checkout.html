@@ -8,7 +8,8 @@
 	<title>Checkout Page</title>
 	<script src="https://cdn.tailwindcss.com"></script>
 
-	<link href="/styles.css" rel="stylesheet">
+	<!-- <link href="/styles.css" rel="stylesheet"> -->
+	<script src="https://unpkg.com/htmx.org@2.0.2"></script>
 </head>
 
 <body class="bg-gray-50">
@@ -60,7 +61,8 @@
 			<!-- Right Column: Payment Form -->
 			<div class="lg:w-1/2 p-8 bg-white rounded-lg shadow-lg" id="checkout-form">
 				<h2 class="text-3xl font-semibold text-gray-700 mb-6">Payment Information</h2>
-				<form action="/pay" method="POST" class="space-y-4">
+				<form hx-post="/pay" hx-swap="innerHTML" hx-target="#msg" class="space-y-4">
+					<input type="hidden" name="amount" value={{ .price }} />
 					<div>
 						<label for="card-holder"
 							class="block text-sm font-medium text-gray-700">Card Holder
@@ -94,6 +96,9 @@
 								placeholder="123" required>
 						</div>
 					</div>
+
+					<p id="msg" class="text-red-500">{{ .message }}</p>
+
 					<div class="mt-6">
 						<button type="submit"
 							class="w-full bg-green-600 text-white py-3 rounded-lg shadow-lg hover:bg-green-700 transition">Complete

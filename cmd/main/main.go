@@ -8,7 +8,7 @@ import (
 
 	"github.com/Ckefa/ckefablog/db"
 	"github.com/Ckefa/ckefablog/handlers"
-	// "github.com/Ckefa/ckefablog/paypal"
+	"github.com/Ckefa/ckefablog/paypal"
 	"github.com/gorilla/sessions"
 	"github.com/joho/godotenv"
 	"github.com/labstack/echo-contrib/session"
@@ -43,7 +43,7 @@ func main() {
 	}
 
 	// Initializing application vitals
-	// paypal.InitPayment()
+	paypal.InitPayment()
 	err = db.Init()
 	if err != nil || db.DB == nil {
 		log.Fatal("DB not initialized")
@@ -58,11 +58,12 @@ func main() {
 	e.Renderer = newTemplate()
 
 	e.GET("/", handlers.HandleHome)
-
 	e.GET("/blog", handlers.HandleIndex)
+
 	e.POST("/subscribe", handlers.Subscribe)
 	e.POST("/login", handlers.Login)
 	e.POST("/signup", handlers.Register)
+	e.POST("/pay", handlers.RequestOrder)
 
 	e.GET("/login", handlers.HandleLogin)
 	e.GET("/signup", handlers.Signup)

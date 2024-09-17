@@ -3,6 +3,7 @@ package handlers
 import (
 	"log"
 	"net/http"
+	"strconv"
 
 	"github.com/Ckefa/ckefablog/db"
 	"github.com/Ckefa/ckefablog/models"
@@ -31,11 +32,20 @@ func Checkout(c echo.Context) error {
 
 func RequestOrder(c echo.Context) error {
 	amt := c.FormValue("amount")
-	order := models.NewOrder(amt)
-	resp := paypal.CreateOrder(order)
-	db.DB.Save(order)
+	log.Println("Paying $", amt)
+	amt_float, err := strconv.ParseFloat(amt, 64)
+	pid := models.GetPid(amt_float)
 
-	return c.Redirect(http.StatusTemporaryRedirect, resp.Links[1].Href)
+	order := models.NewOrder(amt, pid)
+	err = paypal.CreateOrder(order)
+	if err != nil {
+		return c.String(http.StatusAccepted, "error making payment")
+	}
+	if err := db.DB.Create(&order).Error; err != nil {
+		log.Println(err)
+	}
+
+	return c.Redirect(http.StatusTemporaryRedirect, paypal.OrderStatus.Links[1].Href)
 }
 
 func OrderStatus(c echo.Context) error {

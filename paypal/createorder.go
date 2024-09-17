@@ -30,23 +30,53 @@ type Link struct {
 
 var OrderStatus OrderSt
 
-func CreateOrder(order *models.Order) OrderSt {
-
+func CreateOrder(order *models.Order) error {
 	// Define the headers
 	headers := map[string]string{
-		"Content-Type": "application/json",
-		// "PayPal-Request-Id": "7b92603e-77ed-4896-8e78-5dea2050476a",
+		"Content-Type":  "application/json",
 		"Authorization": "Bearer " + AuthToken.Token,
 	}
 
 	// Define the JSON payload
-	data, err := json.MarshalIndent(order, "", " ")
+	payload := map[string]interface{}{
+		"intent": "CAPTURE",
+		"purchase_units": []map[string]interface{}{
+			{
+				"reference_id": order.ID,
+				"amount": map[string]interface{}{
+					"currency_code": "USD",
+					"value":         fmt.Sprintf("%.2f", order.Amount),
+				},
+			},
+		},
+		"payment_source": map[string]interface{}{
+			"paypal": map[string]interface{}{
+				"experience_context": map[string]interface{}{
+					"payment_method_preference": "IMMEDIATE_PAYMENT_REQUIRED",
+					"brand_name":                "CkefaWeb Agency",
+					"locale":                    "en-US",
+					"landing_page":              "LOGIN",
+					"shipping_preference":       "SET_PROVIDED_ADDRESS",
+					"user_action":               "PAY_NOW",
+					"return_url":                fmt.Sprintf("https://www.ckefa.com/confirm/%s", order.ID),
+					"cancel_url":                fmt.Sprintf("https://example.com/cancel/%s", order.ID),
+				},
+			},
+		},
+	}
+
+	// Marshal the payload into JSON
+	data, err := json.Marshal(payload)
+	if err != nil {
+		log.Println("Error marshalling payload:", err)
+		return err
+	}
 
 	// Create a new HTTP request
-	req, err := http.NewRequest("POST", "https://api-m.sandbox.paypal.com/v2/checkout/orders", bytes.NewBuffer([]byte(data)))
-
+	req, err := http.NewRequest("POST", "https://api-m.sandbox.paypal.com/v2/checkout/orders", bytes.NewBuffer(data))
 	if err != nil {
-		log.Fatal("Error creating request:", err)
+		log.Println("Error creating request:", err)
+		return err
 	}
 
 	// Add headers to the request
@@ -58,31 +88,49 @@ func CreateOrder(order *models.Order) OrderSt {
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
-		log.Fatal("Error sending request:", err)
+		log.Println("Error sending request:", err)
+		return err
 	}
 	defer resp.Body.Close()
 
 	// Check if the request was successful
-	if resp.StatusCode == http.StatusCreated || resp.StatusCode == http.StatusOK {
-		fmt.Println("Order created successfully.")
-	} else {
-		fmt.Printf("Failed to create order. Status code: %d\n", resp.StatusCode)
+	if resp.StatusCode != http.StatusCreated && resp.StatusCode != http.StatusOK {
+		log.Printf("Failed to create order. Status code: %d\n", resp.StatusCode)
+		return fmt.Errorf("failed to create order, status code: %d", resp.StatusCode)
 	}
 
+	// Read response body
 	body, err := io.ReadAll(resp.Body)
-	// println(string(body))
-
-	if err := json.Unmarshal(body, &OrderStatus); err != nil {
-		log.Fatal(err)
+	if err != nil {
+		log.Println("Error reading response body:", err)
+		return err
 	}
 
-	fmt.Println(OrderStatus.Status)
-	return OrderStatus
+	// Unmarshal response body into OrderStatus
+	if err := json.Unmarshal(body, &OrderStatus); err != nil {
+		log.Println("Error unmarshalling response:", err)
+		log.Println("Response body:", string(body)) // Log the raw body for debugging
+		return err
+	}
+
+	// Ensure Links array has at least 2 elements
+	if len(OrderStatus.Links) < 2 {
+		log.Println("Insufficient links in response")
+		return fmt.Errorf("unexpected response format")
+	}
+
+	// Update the order with the response details
+	order.PayId = OrderStatus.ID
+	order.StatusMsg = OrderStatus.Status
+	order.Link1 = OrderStatus.Links[0].Href
+	order.Link2 = OrderStatus.Links[1].Href
+
+	return nil
 
 	// sample := map[string]interface{}{
 	// 	"id":     "65037881M3452232B",
 	// 	"status": "PAYER_ACTION_REQUIRED",
-	// 	"payment_source": map[string]interface{}{
+	// 	"payment_source": [string]interface{}{
 	// 		"paypal": map[string]interface{}{},
 	// 	},
 	// 	"links": []map[string]interface{}{

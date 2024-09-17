@@ -33,10 +33,12 @@ func Init() error {
 		return err
 	}
 
-	err = DB.AutoMigrate(&models.User{}, &models.Customer{}, &models.Package{})
+	err = DB.AutoMigrate(&models.User{}, &models.Customer{}, &models.Package{}, &models.Order{})
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("<<Migration Error", err)
 		return err
+	} else {
+		log.Println("<<DB migration complete>>")
 	}
 
 	for _, p := range models.Packages {

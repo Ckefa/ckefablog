@@ -61,11 +61,11 @@ func Login(c echo.Context) error {
 
 	if err := db.DB.Where("email = ?", email).First(&cust).Error; err != nil {
 		log.Println(err)
-		return c.JSON(http.StatusAccepted, err.Error())
+		return c.String(http.StatusAccepted, err.Error())
 	}
 
 	if passwd != cust.Passwd {
-		return c.JSON(http.StatusAccepted, "Incorrect password")
+		return c.String(http.StatusAccepted, "Incorrect password")
 	}
 
 	sess, _ := session.Get("session", c)
