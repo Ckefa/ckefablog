@@ -7,7 +7,6 @@ import (
 	"io"
 	"log"
 	"net/http"
-	"os"
 
 	"github.com/Ckefa/ckefablog/models"
 )
@@ -32,10 +31,6 @@ type Link struct {
 var OrderStatus OrderSt
 
 func CreateOrder(order *models.Order) error {
-	paypalUrl := os.Getenv("PaypalUrl")
-	if paypalUrl != "" {
-		log.Println("<< Env varibale PaypalUrl Failed to load")
-	}
 	// Define the headers
 	headers := map[string]string{
 		"Content-Type":  "application/json",
@@ -78,7 +73,7 @@ func CreateOrder(order *models.Order) error {
 	}
 
 	// Create a new HTTP request
-	req, err := http.NewRequest("POST", paypalUrl+"/v2/checkout/orders", bytes.NewBuffer(data))
+	req, err := http.NewRequest("POST", Url+"/v2/checkout/orders", bytes.NewBuffer(data))
 	if err != nil {
 		log.Println("Error creating request:", err)
 		return err
@@ -89,6 +84,7 @@ func CreateOrder(order *models.Order) error {
 		req.Header.Set(key, value)
 	}
 
+	log.Println("requesting ", Url)
 	// Make the request
 	client := &http.Client{}
 	resp, err := client.Do(req)

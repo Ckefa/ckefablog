@@ -24,6 +24,7 @@ type AccessToken struct {
 }
 
 var (
+	Url         string
 	AuthToken   AccessToken
 	tokenExpiry time.Time
 	mu          sync.Mutex
@@ -76,9 +77,23 @@ func SaveAuthToken() error {
 }
 
 func InitPayment() {
-	paypalUrl := os.Getenv("PaypalUrl")
-	if paypalUrl != "" {
-		log.Println("<< Env varibale PaypalUrl Failed to load")
+	mode := os.Getenv("Mode")
+
+	var paypalurl, clientid, clientsecret string
+	if mode == "sandbox" {
+		paypalurl = "PaypalSandbox"
+		clientid = "SandboxClientID"
+		clientsecret = "SandboxClientSecret"
+
+	} else {
+		paypalurl = "PaypalLive"
+		clientid = "LiveClientID"
+		clientsecret = "LiveClientSecret"
+	}
+
+	Url = os.Getenv(paypalurl)
+	if Url == "" {
+		log.Println("<< func:InitPayment - Env varibale PaypalUrl Failed to load")
 	}
 	mu.Lock()
 	defer mu.Unlock()
@@ -94,8 +109,8 @@ func InitPayment() {
 		return
 	}
 
-	clientID := os.Getenv("ClientID")
-	clientSecret := os.Getenv("ClientSecret")
+	clientID := os.Getenv(clientid)
+	clientSecret := os.Getenv(clientsecret)
 
 	// Create basic authentication header
 	auth := base64.StdEncoding.EncodeToString([]byte(clientID + ":" + clientSecret))
@@ -105,7 +120,7 @@ func InitPayment() {
 	form.Add("grant_type", "client_credentials")
 
 	// Create the HTTP request
-	req, err := http.NewRequest("POST", paypalUrl+"/v1/oauth2/token", bytes.NewBufferString(form.Encode()))
+	req, err := http.NewRequest("POST", Url+"/v1/oauth2/token", bytes.NewBufferString(form.Encode()))
 	if err != nil {
 		fmt.Println("Error creating request:", err)
 		return

@@ -44,6 +44,8 @@ func main() {
 
 	// Initializing application vitals
 	paypal.InitPayment()
+
+	// Initializing DB
 	err = db.Init()
 	if err != nil || db.DB == nil {
 		log.Fatal("DB not initialized")
