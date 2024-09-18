@@ -45,7 +45,8 @@ func RequestOrder(c echo.Context) error {
 		log.Println(err)
 	}
 
-	return c.Redirect(http.StatusTemporaryRedirect, paypal.OrderStatus.Links[1].Href)
+	c.Response().Header().Set("HX-Redirect", order.Link2)
+	return c.String(http.StatusOK, "Order Created")
 }
 
 func OrderStatus(c echo.Context) error {
@@ -59,36 +60,36 @@ func OrderStatus(c echo.Context) error {
 		return c.String(http.StatusNotFound, "Order not found")
 	}
 
-	return c.Render(200, "order_status", map[string]interface{}{
-		"order": order,
-	})
+	return c.Render(200, "order_status", order)
 }
 
 func ConfirmOrder(c echo.Context) error {
 	orderID := c.Param("id")
-	status := paypal.CheckOrderStatus(orderID)
 
 	//create fetch jorder fro gorm database
 	var order models.Order
 
 	// Fetch the order from the GORM database
+	log.Println("<< searching order ", orderID)
 	if err := db.DB.Where("id = ?", orderID).First(&order).Error; err != nil {
 		// Handle the case where the order is not found
+		log.Println("<< Order not found >>")
 		return c.String(http.StatusNotFound, "Order not found")
 	}
+	orderStatus := paypal.CheckOrderStatus(order.PayId)
 
-	if status.Status == "APPROVED" {
+	if orderStatus.Status == "APPROVED" {
 		order.Status = true
+		order.StatusMsg = orderStatus.Status
 		db.DB.Save(order)
 	}
-	return c.Render(200, "order_status", map[string]interface{}{
-		"order": order,
-	})
+
+	order["PackName"] = models.Packages[order.PackageID].Name
+	return c.Render(200, "order_status", order)
 }
 
 func CancelOrder(c echo.Context) error {
 	orderID := c.Param("id")
-	status := paypal.CheckOrderStatus(orderID)
 
 	//create fetch jorder fro gorm database
 	var order models.Order
@@ -98,13 +99,13 @@ func CancelOrder(c echo.Context) error {
 		// Handle the case where the order is not found
 		return c.String(http.StatusNotFound, "Order not found")
 	}
+	orderStatus := paypal.CheckOrderStatus(order.PayId)
 
-	if status.Status == "APPROVED" {
+	if orderStatus.Status == "APPROVED" {
 		order.Status = true
+		order.StatusMsg = orderStatus.Status
 		db.DB.Save(order)
 	}
 
-	return c.Render(200, "order_status", map[string]interface{}{
-		"order": order,
-	})
+	return c.Render(200, "order_status", order)
 }

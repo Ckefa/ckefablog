@@ -13,9 +13,9 @@ type OrderResponse struct {
 	Status string `json:"status"`
 }
 
-func CheckOrderStatus(orderID string) OrderResponse {
+func CheckOrderStatus(payID string) OrderResponse {
 	// Set up the URL for the PayPal order
-	url := fmt.Sprintf("https://api.sandbox.paypal.com/v2/checkout/orders/%s", orderID)
+	url := fmt.Sprintf("https://api.sandbox.paypal.com/v2/checkout/orders/%s", payID)
 
 	// Create a new HTTP request
 	req, err := http.NewRequest("GET", url, nil)

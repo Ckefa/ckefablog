@@ -11,62 +11,63 @@
 </head>
 
 <body class="bg-gray-100">
+	<div class="min-h-screen flex items-center justify-center">
+		<div class="bg-white shadow-md rounded-lg p-8 max-w-md w-full">
+			<h1 class="text-2xl font-bold text-gray-800 mb-4">Order Status</h1>
 
-	<!-- Page Container -->
-	<div class="container mx-auto mt-10">
-		<div class="bg-white rounded-lg shadow-md p-8 max-w-lg mx-auto">
-			<!-- Order Status Card -->
-
-			<div class="flex justify-between items-center mb-6">
-				<h2 class="text-2xl font-semibold text-gray-800">Order Status</h2>
-				<span class="bg-green-100 text-green-600 text-sm font-semibold py-1 px-3 rounded">
-					{{.status}}
-				</span>
+			<div class="mb-4">
+				<h2 class="text-lg font-semibold text-gray-600">Order ID:</h2>
+				<p class="text-gray-800">{{ .ID }}</p>
 			</div>
 
-			<!-- Order ID -->
 			<div class="mb-4">
-				<p class="text-sm font-semibold text-gray-600">Order ID:</p>
-				<!-- <p class="text-lg text-gray-800">{{.order.ID}}</p> -->
+				<h2 class="text-lg font-semibold text-gray-600">Package:</h2>
+				<p class="text-gray-800">Package No: {{ .PackageID }} {{ .PackageName }}</p>
 			</div>
 
-			<!-- Amount -->
 			<div class="mb-4">
-				<p class="text-sm font-semibold text-gray-600">Amount:</p>
-				<p class="text-lg text-gray-800">{{index .order.PurchaseUnits 0 "Amount" "Value"}}
-					{{index .order.PurchaseUnits 0 "Amount" "CurrencyCode"}}</p>
+				<h2 class="text-lg font-semibold text-gray-600">Amount:</h2>
+				<p class="text-gray-800">{{ .Amount }} USD</p>
 			</div>
 
-			<!-- Shipping Address -->
 			<div class="mb-4">
-				<p class="text-sm font-semibold text-gray-600">Shipping Address:</p>
-				<p class="text-lg text-gray-800">
-					{{index .order.PurchaseUnits 0 "Shipping" "Address" "AddressLine1"}},<br>
-					{{index .order.PurchaseUnits 0 "Shipping" "Address" "AdminArea2"}},<br>
-					{{index .order.PurchaseUnits 0 "Shipping" "Address" "AdminArea1"}} -
-					{{index .order.PurchaseUnits 0 "Shipping" "Address" "PostalCode"}},<br>
-					{{index .order.PurchaseUnits 0 "Shipping" "Address" "CountryCode"}}
+				<h2 class="text-lg font-semibold text-gray-600">Payment ID:</h2>
+				<p class="text-gray-800">{{ .PayId }}</p>
+			</div>
+
+			<div class="mb-4">
+				<h2 class="text-lg font-semibold text-gray-600">Status:</h2>
+				<p class="text-gray-800">
+					{{ if .Status }}
+					<span class="text-green-500 font-semibold">Approved</span>
+					{{ else }}
+					<span class="text-red-500 font-semibold">Pending</span>
+
+					{{ end }}
 				</p>
 			</div>
 
-			<!-- Payment Information -->
 			<div class="mb-4">
-				<p class="text-sm font-semibold text-gray-600">Payment Method:</p>
-				<p class="text-lg text-gray-800">PayPal</p>
+				<h2 class="text-lg font-semibold text-gray-600">Status Message:</h2>
+				<p class="text-gray-800">{{ .StatusMsg }}</p>
 			</div>
 
-			<!-- Buttons for Order Actions -->
-			<div class="mt-6 flex justify-between">
-				<a href="/"
-					class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded shadow">
-					Continue Shopping
-				</a>
-				<a href="https://www.ckefa.com/order/cancel/{{.order.ID}}"
-					class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded shadow">
-					Cancel Order
-				</a>
+			{{ if not .Status }}
+			<div class="mb-4">
+				<h2 class="text-2xl font-semibold text-gray-600">Complete Order:</h2>
+				<ul class="list-disc ml-5">
+					<li>
+						<a href="{{ .Link2 }}" class="text-blue-500 hover:underline">Click here
+							to complete order</a>
+					</li>
+				</ul>
 			</div>
+			{{ end }}
 
+			<div class="mt-6 text-center">
+				<a href="/" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Go
+					Back to Homepage</a>
+			</div>
 		</div>
 	</div>
 
