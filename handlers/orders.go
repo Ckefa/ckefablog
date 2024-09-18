@@ -84,7 +84,6 @@ func ConfirmOrder(c echo.Context) error {
 		db.DB.Save(order)
 	}
 
-	order["PackName"] = models.Packages[order.PackageID].Name
 	return c.Render(200, "order_status", order)
 }
 

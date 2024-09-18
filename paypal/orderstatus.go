@@ -6,6 +6,7 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"os"
 )
 
 type OrderResponse struct {
@@ -14,8 +15,13 @@ type OrderResponse struct {
 }
 
 func CheckOrderStatus(payID string) OrderResponse {
+	paypalUrl := os.Getenv("paypalUrl")
+	if paypalUrl != "" {
+		log.Println("<< Env varibale PaypalUrl Failed to load")
+	}
+
 	// Set up the URL for the PayPal order
-	url := fmt.Sprintf("https://api.sandbox.paypal.com/v2/checkout/orders/%s", payID)
+	url := fmt.Sprintf("%s/v2/checkout/orders/%s", paypalUrl, payID)
 
 	// Create a new HTTP request
 	req, err := http.NewRequest("GET", url, nil)

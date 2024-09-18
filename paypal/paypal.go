@@ -101,7 +101,7 @@ func InitPayment() {
 	form.Add("grant_type", "client_credentials")
 
 	// Create the HTTP request
-	req, err := http.NewRequest("POST", "https://api-m.sandbox.paypal.com/v1/oauth2/token", bytes.NewBufferString(form.Encode()))
+	req, err := http.NewRequest("POST", paypalurl+"/v1/oauth2/token", bytes.NewBufferString(form.Encode()))
 	if err != nil {
 		fmt.Println("Error creating request:", err)
 		return
