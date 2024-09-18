@@ -1,0 +1,101 @@
+{{ define "checkout" }}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Checkout Page</title>
+	<script src="https://cdn.tailwindcss.com"></script>
+
+	<!-- <link href="/styles.css" rel="stylesheet"> -->
+	<script src="https://unpkg.com/htmx.org@2.0.2"></script>
+</head>
+
+<body class="bg-gray-50">
+	<div class="container mx-auto mt-10">
+		<div class="flex flex-col lg:flex-row justify-between items-start gap-2">
+
+			<!-- Left Column: Order Summary -->
+			<div class="lg:w-1/2 p-8 bg-white rounded-lg shadow-lg mb-10 lg:mb-0">
+				<h2 class="text-3xl font-semibold text-gray-700 mb-4">Order Summary</h2>
+
+				<!-- Package Selection Dropdown -->
+				<div class="mb-4">
+					<label for="package-select"
+						class="block text-lg font-medium text-gray-600 mb-2">Select
+						Package:</label>
+					<select id="package-select"
+						class="w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-3"
+						onchange="redirectToPackage()">
+						<option value="/checkout/1" {{ if eq .id 1 }}selected{{ end }}>{{ .name
+							}}</option>
+						<option value="/checkout/2" {{ if eq .id 2 }}selected{{ end }}>Basic
+							Package</option>
+						<option value="/checkout/3" {{ if eq .id 3 }}selected{{ end }}>Standard
+							Package</option>
+						<option value="/checkout/4" {{ if eq .id 4 }}selected{{ end }}>Premium
+							Package</option>
+					</select>
+				</div>
+
+				<div class="flex justify-between items-center mb-2">
+					<span class="text-lg font-medium text-gray-600">Package</span>
+					<span class="text-lg font-bold text-gray-900">{{ .name }}</span>
+				</div>
+				<div class="flex justify-between items-center mb-2">
+					<span class="text-lg font-medium text-gray-600">Cost</span>
+					<span class="text-lg text-green-600 font-bold">${{ .price }}</span>
+				</div>
+
+				<div class="mb-4">
+					<span class="text-lg font-medium text-gray-600">This package will cover:</span>
+					<ul class="list-disc list-inside mt-2 text-gray-700">
+						{{ range .details }}
+						<li>{{ . }}</li>
+						{{ end }}
+					</ul>
+				</div>
+			</div>
+
+			<!-- Right Column: Order Confirmation -->
+			<div class="lg:w-1/2 p-8 bg-white rounded-lg shadow-lg" id="checkout-form">
+				<h2 class="text-3xl font-semibold text-gray-700 mb-6">Confirm Order</h2>
+				<form hx-post="/pay" hx-swap="innerHTML" hx-target="#msg" class="space-y-4">
+					<input type="hidden" name="amount" value={{ .price }} />
+
+					<p></p>
+
+					<div class="mt-6 p-4 bg-blue-100 border-l-4 border-blue-500 text-blue-700">
+						<p class="font-semibold">Need Help?</p>
+						<p>If you experience any issues or have questions during checkout, feel
+							free to <a href="/#contact"
+								class="text-blue-600 underline">contact us</a>. Our team
+							is here to assist you!</p>
+					</div>
+
+
+					<p id="msg" class="text-red-500">{{ .message }}</p>
+
+					<div class="mt-6">
+						<button type="submit"
+							class="w-full bg-green-600 text-white py-3 rounded-lg shadow-lg hover:bg-green-700 transition">Complete
+							Payment</button>
+					</div>
+				</form>
+			</div>
+
+		</div>
+	</div>
+
+	<!-- JavaScript to redirect based on package selection -->
+	<script>
+		function redirectToPackage() {
+			var packageUrl = document.getElementById('package-select').value;
+			window.location.href = packageUrl;
+		}
+	</script>
+</body>
+
+</html>
+{{ end }}

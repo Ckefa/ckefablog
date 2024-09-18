@@ -6,9 +6,12 @@ import (
 	"os"
 	"text/template"
 
-	"github.com/Ckefa/ckefablog.git/db"
-	"github.com/Ckefa/ckefablog.git/handlers"
+	"github.com/Ckefa/ckefablog/db"
+	"github.com/Ckefa/ckefablog/handlers"
+	"github.com/Ckefa/ckefablog/paypal"
+	"github.com/gorilla/sessions"
 	"github.com/joho/godotenv"
+	"github.com/labstack/echo-contrib/session"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )
@@ -39,6 +42,8 @@ func main() {
 		log.Fatal("<<Port not Configured>>")
 	}
 
+	// Initializing application vitals
+	paypal.InitPayment()
 	err = db.Init()
 	if err != nil || db.DB == nil {
 		log.Fatal("DB not initialized")
@@ -47,12 +52,27 @@ func main() {
 	e := echo.New()
 
 	e.Use(middleware.Logger())
+	e.Use(session.Middleware(sessions.NewCookieStore([]byte("Clinton#1234"))))
 	e.Static("/", "static")
 
 	e.Renderer = newTemplate()
 
-	e.GET("/", handlers.HandleIndex)
-	e.POST("/subscribe", handlers.Signup)
+	e.GET("/", handlers.HandleHome)
+	e.GET("/blog", handlers.HandleIndex)
+
+	e.POST("/subscribe", handlers.Subscribe)
+	e.POST("/login", handlers.Login)
+	e.POST("/signup", handlers.Register)
+	e.POST("/pay", handlers.RequestOrder)
+
+	e.GET("/login", handlers.HandleLogin)
+	e.GET("/signup", handlers.Signup)
+	e.GET("/logout", handlers.Logout)
+
+	e.GET("/checkout/:pid", handlers.Checkout)
+
+	e.GET("/order/confirm/:id", handlers.ConfirmOrder)
+	e.GET("/oder/cancel/:id", handlers.CancelOrder)
 
 	e.GET("/tech/golang-server-side-rendering", handlers.ServerSideRendering)
 	e.GET("/tech/googlefi", handlers.GoogleFi)

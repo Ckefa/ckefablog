@@ -1,6 +1,37 @@
 package handlers
 
-import "github.com/labstack/echo/v4"
+import (
+	"log"
+	"net/http"
+
+	"github.com/Ckefa/ckefablog/db"
+	"github.com/Ckefa/ckefablog/models"
+	"github.com/labstack/echo-contrib/session"
+	"github.com/labstack/echo/v4"
+)
+
+func HandleHome(c echo.Context) error {
+	var cust models.Customer
+
+	sess, _ := session.Get("session", c)
+	user_id, ok := sess.Values["user_id"]
+	if !ok {
+		log.Println("User not loggged in!!")
+	}
+
+	if err := db.DB.Where("id = ?", user_id).First(&cust).Error; err != nil {
+		log.Println(err)
+	}
+
+	user := map[string]interface{}{
+		"name":  cust.Fname,
+		"email": cust.Email,
+	}
+
+	log.Println("Current user", user)
+
+	return c.Render(http.StatusOK, "home", user)
+}
 
 func HandleIndex(c echo.Context) error {
 	return c.Render(200, "index", nil)

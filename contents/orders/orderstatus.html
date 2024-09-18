@@ -1,0 +1,79 @@
+{{ define "order_status" }}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Order Status</title>
+	<script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100">
+	<div class="min-h-screen flex items-center justify-center">
+		<div class="bg-white shadow-md rounded-lg p-8 max-w-md w-full">
+			<h1 class="text-2xl font-bold text-gray-800 mb-4">Order Status</h1>
+
+			<div class="mb-4">
+				<h2 class="text-lg font-semibold text-gray-600">Order ID:</h2>
+				<p class="text-gray-800">{{ .ID }}</p>
+			</div>
+
+			<div class="mb-4">
+				<h2 class="text-lg font-semibold text-gray-600">Package:</h2>
+				<p class="text-gray-800">Package: {{ .PackageID }} {{ .PackageName }}</p>
+			</div>
+
+			<div class="mb-4">
+				<h2 class="text-lg font-semibold text-gray-600">Amount:</h2>
+				<p class="text-gray-800">{{ .Amount }} USD</p>
+			</div>
+
+			<div class="mb-4">
+				<h2 class="text-lg font-semibold text-gray-600">Payment ID:</h2>
+				<p class="text-gray-800">{{ .PayId }}</p>
+			</div>
+
+			<div class="mb-4">
+				<h2 class="text-lg font-semibold text-gray-600">Status:</h2>
+				<p class="text-gray-800">
+					{{ if .Status }}
+					<span class="text-green-500 font-semibold">Approved</span>
+					{{ else }}
+					<span class="text-red-500 font-semibold">Pending</span>
+
+					{{ end }}
+				</p>
+			</div>
+
+			<div class="mb-4">
+				<h2 class="text-lg font-semibold text-gray-600">Status Message:</h2>
+				<p class="text-gray-800">{{ .StatusMsg }}</p>
+			</div>
+
+			{{ if not .Status }}
+			<div class="mb-4">
+				<h2 class="text-2xl font-semibold text-gray-600">Complete Order:</h2>
+				<ul class="list-disc ml-5">
+					<li>
+						<a href="{{ .Link2 }}" class="text-blue-500 hover:underline">Click here
+							to complete order</a>
+					</li>
+				</ul>
+			</div>
+			{{ end }}
+
+			<div class="mt-6 text-center">
+				<a href="/" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Go
+					Back to Homepage</a>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+</html>
+
+
+{{ end }}

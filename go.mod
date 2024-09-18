@@ -1,10 +1,12 @@
-module github.com/Ckefa/ckefablog.git
+module github.com/Ckefa/ckefablog
 
 go 1.22.5
 
 require (
 	github.com/google/uuid v1.6.0
+	github.com/gorilla/sessions v1.2.2
 	github.com/joho/godotenv v1.5.1
+	github.com/labstack/echo-contrib v0.17.1
 	github.com/labstack/echo/v4 v4.12.0
 	gorm.io/driver/mysql v1.5.7
 	gorm.io/gorm v1.25.7
@@ -13,6 +15,8 @@ require (
 require (
 	github.com/go-sql-driver/mysql v1.7.0 // indirect
 	github.com/golang-jwt/jwt v3.2.2+incompatible // indirect
+	github.com/gorilla/context v1.1.2 // indirect
+	github.com/gorilla/securecookie v1.1.2 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect
 	github.com/labstack/gommon v0.4.2 // indirect
