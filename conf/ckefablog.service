@@ -8,7 +8,7 @@ Group=www-data
 WorkingDirectory=/apps/ckefablog/
 ExecStart=/apps/ckefablog/bin/app
 StandardOutput=append:/var/log/ckefablog.log
-StandartError=append:/var/log/ckefablog.err.log
+StandardError=append:/var/log/ckefablog.err.log
 Restart=always
 
 
