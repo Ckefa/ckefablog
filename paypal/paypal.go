@@ -25,6 +25,7 @@ type AccessToken struct {
 
 var (
 	Url         string
+	Mode        string
 	AuthToken   AccessToken
 	tokenExpiry time.Time
 	mu          sync.Mutex
@@ -77,10 +78,10 @@ func SaveAuthToken() error {
 }
 
 func InitPayment() {
-	mode := os.Getenv("Mode")
+	Mode = os.Getenv("Mode")
 
 	var paypalurl, clientid, clientsecret string
-	if mode == "sandbox" {
+	if Mode == "sandbox" {
 		paypalurl = "PaypalSandbox"
 		clientid = "SandboxClientID"
 		clientsecret = "SandboxClientSecret"
