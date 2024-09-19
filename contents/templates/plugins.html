@@ -1,0 +1,35 @@
+{{ block "plugin" . }}
+<!-- Meta Tags -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<!-- Google Ads -->
+<meta name="google-adsense-account" content="ca-pub-8387385583486694">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8387385583486694"
+  crossorigin="anonymous"></script>
+
+<!-- Google Tag Manager -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E51BLXZ6ZG"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-E51BLXZ6ZG');
+</script>
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="/main/ckefa.jpg">
+
+<!-- Custom Tailwind CSS -->
+{{ template "tailwind" . }}
+
+<!-- Preconnect to improve resource load times -->
+<link rel="preconnect" href="https://pagead2.googlesyndication.com">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+{{ end }}
+
+{{ block "thanks" . }}
+<div class="bg-blue-800 p-2 mx-auto text-white">
+  Thank you For Your Effort!!
+</div>
+{{ end }}

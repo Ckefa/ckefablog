@@ -70,7 +70,7 @@ func main() {
 	e.GET("/login", handlers.HandleLogin)
 	e.GET("/signup", handlers.Signup)
 	e.GET("/logout", handlers.Logout)
-
+	e.GET("/services", handlers.GetServices)
 	e.GET("/checkout/:pid", handlers.Checkout)
 
 	e.GET("/order/confirm/:id", handlers.ConfirmOrder)

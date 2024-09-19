@@ -13,8 +13,7 @@
   <link rel="icon" type="image/png" href="/main/ckefa.jpg">
 
   <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-
+  {{ template "tailwind" . }}
 </head>
 
 <body class="font-sans leading-normal text-gray-900">
@@ -47,10 +46,9 @@
             online presence.</p>
           <p class="text-4xl font-bold text-blue-600 mb-6">$199</p>
           <ul class="text-left mb-6">
-            <li class="mb-2">✔ 3 Custom Pages</li>
-            <li class="mb-2">✔ Responsive Design</li>
-            <li class="mb-2">✔ Basic SEO Optimization</li>
-            <li class="mb-2">✔ 1 Month Support</li>
+            {{ range index .packs 2 }}
+            <li class="mb-2">{{ . }}</li>
+            {{ end }}
           </ul>
           <a href="/checkout/2" class="block bg-blue-600 text-white py-2 px-4 rounded-full">Get Started</a>
         </div>
@@ -62,10 +60,9 @@
             with additional features.</p>
           <p class="text-4xl font-bold text-blue-600 mb-6">$499</p>
           <ul class="text-left mb-6">
-            <li class="mb-2">✔ 6 Custom Pages</li>
-            <li class="mb-2">✔ Responsive Design</li>
-            <li class="mb-2">✔ Advanced SEO Optimization</li>
-            <li class="mb-2">✔ 3 Months Support</li>
+            {{ range index .packs 3 }}
+            <li class="mb-2">{{ . }}</li>
+            {{ end }}
           </ul>
           <a href="/checkout/3" class="block bg-blue-600 text-white py-2 px-4 rounded-full">Get Started</a>
         </div>
@@ -77,10 +74,9 @@
             integrations.</p>
           <p class="text-4xl font-bold text-blue-600 mb-6">$999</p>
           <ul class="text-left mb-6">
-            <li class="mb-2">✔ 10 Custom Pages</li>
-            <li class="mb-2">✔ E-Commerce Integration</li>
-            <li class="mb-2">✔ Advanced SEO & Analytics</li>
-            <li class="mb-2">✔ 6 Months Support</li>
+            {{ range index .packs 4 }}
+            <li class="mb-2">{{ . }}</li>
+            {{ end }}
           </ul>
           <a href="/checkout/4" class="block bg-blue-600 text-white py-2 px-4 rounded-full">Get Started</a>
         </div>

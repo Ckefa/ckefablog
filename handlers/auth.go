@@ -72,7 +72,7 @@ func Login(c echo.Context) error {
 	sess.Values["user_id"] = cust.ID
 	sess.Save(c.Request(), c.Response())
 
-	c.Response().Header().Set("HX-Redirect", "/")
+	c.Response().Header().Set("HX-Redirect", "/services")
 	return c.NoContent(http.StatusOK)
 }
 
@@ -85,7 +85,12 @@ func Logout(c echo.Context) error {
 	sess.Options.MaxAge = -1
 	sess.Save(c.Request(), c.Response())
 
-	return c.Render(http.StatusOK, "home", nil)
+	respData := map[string]interface{}{
+		"packs": models.OrderDetails,
+	}
+
+	return c.Render(http.StatusOK, "home", respData)
+
 }
 
 func Signup(c echo.Context) error {

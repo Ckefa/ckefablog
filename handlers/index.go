@@ -22,15 +22,19 @@ func HandleHome(c echo.Context) error {
 	if err := db.DB.Where("id = ?", user_id).First(&cust).Error; err != nil {
 		log.Println(err)
 	}
-
 	user := map[string]interface{}{
 		"name":  cust.Fname,
 		"email": cust.Email,
+		"subs":  cust.PackageID,
+	}
+	respData := map[string]interface{}{
+		"user":  user,
+		"packs": models.OrderDetails,
 	}
 
-	log.Println("Current user", user)
+	log.Println("Current user", respData)
 
-	return c.Render(http.StatusOK, "home", user)
+	return c.Render(http.StatusOK, "home", respData)
 }
 
 func HandleIndex(c echo.Context) error {

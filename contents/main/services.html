@@ -1,0 +1,114 @@
+{{ define "services" }}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Services</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/main/ckefa.jpg">
+
+  {{ template "tailwind" . }}
+</head>
+
+<body class="bg-gray-100">
+  {{ template "nav" . }}
+
+  <div class="container mx-auto px-4 py-8">
+
+    <div class="flex flex-col sm:gap-16 sm:flex-row">
+      <h1 class="text-4xl font-bold text-center mb-8">Your Services</h1>
+      {{ if not .user.email }}
+      <h2 class="text-2xl font-semibold text-center text-red-500 mb-8">Please Signup or Login to see Your services</h2>
+      {{ else }}
+      <h2 class="text-2xl font-semibold text-center text-blue-600 mb-8">{{ .names }}</h2>
+      {{ end }}
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- Service Card -->
+      <div class="bg-white shadow-lg rounded-lg p-6">
+        <div class="flex flex-col gap-2">
+          <h2 class="font-bold text-xl text-red-500">You dont have an active Service</h2>
+          <a class="bg-blue-600 hover:bg-green-400 hover:text-black pl-2 rounded-lg font-semibold text-lg text-white"
+            href="/#services">Explore Our
+            Services<a />
+        </div>
+
+        <h2 class="text-xl font-semibold mb-2">Package {{ .pack }}</h2>
+        <div class="flex gap-4">
+          <div>ID:</div>
+          <div>{{ .pid }}</div>
+        </div>
+        <div class="flex gap-4">
+          <div>Status: </div>
+          <div class="text-green-600 mb-4">{{ .status }}</div>
+        </div>
+        <div class="flex gap-4">
+          <div>Price:</div>
+          <div class="text-blue-600 font-bold">${{ printf "%.2f" .price }}</div>
+        </div>
+      </div>
+
+
+      <!-- Chat Input -->
+      <div>
+        <h2 class="font-semibold text-2xl">Live Chat</h2>
+
+        <form action="/send-chat" method="POST" class="flex">
+          <input type="text" id="chat-message" name="message"
+            class="w-full p-2 border border-gray-300 rounded-l-md focus:outline-none focus:border-blue-500"
+            placeholder="Type your message here...">
+          <button type="submit"
+            class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-r-md">Send</button>
+        </form>
+      </div>
+
+      <!-- User Follow-up UX Card -->
+      <div class="bg-white shadow-lg rounded-lg p-6">
+        <h2 class="text-xl font-semibold mb-2">Follow Up on Your Project</h2>
+
+        <!-- Progress Tracker -->
+        <div class="mb-6">
+          <h3 class="text-lg font-semibold mb-2">Project Progress</h3>
+          <div class="relative pt-1">
+            <div class="overflow-hidden h-2 text-xs flex rounded bg-green-200">
+              <div style="width:{{.progress}}%"
+                class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-500">
+              </div>
+            </div>
+            <p class="mt-2 text-sm text-gray-600">{{ .progress }}% Complete</p>
+          </div>
+        </div>
+
+        <!-- Feedback Form -->
+        <form action="/submit-feedback" method="POST" class="mb-6">
+          <div class="mb-4">
+            <label for="suggestions" class="block text-gray-700 font-semibold mb-2">Your Suggestions</label>
+            <textarea id="suggestions" name="suggestions" rows="4"
+              class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+              placeholder="Enter your suggestions, updates, or inquiries here..."></textarea>
+          </div>
+          <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md">Submit
+            Feedback</button>
+        </form>
+
+        <!-- Contact Section -->
+        <div class="mt-4">
+          <h3 class="text-lg font-semibold mb-2">Need Further Assistance?</h3>
+          <p class="text-gray-600 mb-4">Feel free to reach out to our support team for more information about your
+            project.</p>
+          <a href="mailto:support@ckefa.com" class="text-blue-600 hover:underline">support@ckefa.com</a>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</body>
+
+</html>
+{{ end }}
