@@ -21,7 +21,11 @@
     <div class="flex flex-col sm:gap-16 sm:flex-row">
       <h1 class="text-4xl font-bold text-center mb-8">Your Services</h1>
       {{ if not .user.email }}
-      <h2 class="text-2xl font-semibold text-center text-red-500 mb-8">Please Signup or Login to see Your services</h2>
+      <h2 class="text-2xl font-semibold text-center text-red-500 mb-8">
+        Please <a class="px-2 text-lg rounded-lg bg-blue-300" href="/login">Login</a> or
+        <a class="px-2 text-lg rounded-lg bg-blue-300" href="/signup">Signup</a>
+        see Your services
+      </h2>
       {{ else }}
       <h2 class="text-2xl font-semibold text-center text-blue-600 mb-8">{{ .names }}</h2>
       {{ end }}
@@ -31,12 +35,14 @@
 
       <!-- Service Card -->
       <div class="bg-white shadow-lg rounded-lg p-6">
+        {{ if not .pack }}
         <div class="flex flex-col gap-2">
           <h2 class="font-bold text-xl text-red-500">You dont have an active Service</h2>
           <a class="bg-blue-600 hover:bg-green-400 hover:text-black pl-2 rounded-lg font-semibold text-lg text-white"
             href="/#services">Explore Our
             Services<a />
         </div>
+        {{ end }}
 
         <h2 class="text-xl font-semibold mb-2">Package {{ .pack }}</h2>
         <div class="flex gap-4">
@@ -75,7 +81,7 @@
         <div class="mb-6">
           <h3 class="text-lg font-semibold mb-2">Project Progress</h3>
           <div class="relative pt-1">
-            <div class="overflow-hidden h-2 text-xs flex rounded bg-green-200">
+            <div class="overflow-hidden h-4 text-xs flex rounded bg-green-200">
               <div style="width:{{.progress}}%"
                 class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-500">
               </div>

@@ -32,8 +32,6 @@ func HandleHome(c echo.Context) error {
 		"packs": models.OrderDetails,
 	}
 
-	log.Println("Current user", respData)
-
 	return c.Render(http.StatusOK, "home", respData)
 }
 

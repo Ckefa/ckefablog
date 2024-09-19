@@ -4,7 +4,7 @@
   "description": "blogging website",
   "main": "index.js",
   "scripts": {
-    "build:css": "npx postcss static/post.css -o static/styles.css",
+    "build:css": "npx tailwindcss -i ./static/post.css -o ./static/styles.css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "clinton kefa",
