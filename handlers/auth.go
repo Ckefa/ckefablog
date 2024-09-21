@@ -15,12 +15,12 @@ func Subscribe(c echo.Context) error {
 	new_email := c.FormValue("email")
 
 	if new_email == "" {
-		log.Println("Email not Found!!")
+		log.Println("<< func Subscribe: - Email not Found!!")
 		return errors.New("Mail not Found")
 	}
 
 	if db.DB == nil {
-		return errors.New("Database not Connected!")
+		return errors.New("<< func Subscribe: - Database not Connected!")
 	}
 
 	user := models.NewUser(new_email)

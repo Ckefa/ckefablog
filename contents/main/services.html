@@ -35,7 +35,7 @@
 
       <!-- Service Card -->
       <div class="bg-white shadow-lg rounded-lg p-6">
-        {{ if not .pack }}
+        {{ if eq .pid 1 }}
         <div class="flex flex-col gap-2">
           <h2 class="font-bold text-xl text-red-500">You dont have an active Service</h2>
           <a class="bg-blue-600 hover:bg-green-400 hover:text-black pl-2 rounded-lg font-semibold text-lg text-white"

@@ -30,6 +30,7 @@ func GetServices(c echo.Context) error {
 		"email": cust.Email,
 		"subs":  cust.PackageID,
 	}
+
 	respData := map[string]interface{}{
 		"user":     user,
 		"names":    cust.Fname + " " + cust.Lname,
@@ -39,8 +40,6 @@ func GetServices(c echo.Context) error {
 		"status":   "inprogress",
 		"progress": 10,
 	}
-
-	log.Println("ttttttttttttt", respData["pack"])
 
 	return c.Render(http.StatusOK, "services", respData)
 }
