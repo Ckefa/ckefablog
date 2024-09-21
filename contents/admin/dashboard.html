@@ -73,7 +73,7 @@
 					<!-- Card 1 -->
 					<div class="bg-white p-6 rounded-lg shadow-lg">
 						<h3 class="text-lg font-bold">Total Projects</h3>
-						<p class="text-gray-600 mt-2 text-xl">23</p>
+						<p class="text-gray-600 mt-2 text-xl">{{ .total }}</p>
 						<div class="mt-4">
 							<a href="#" class="text-blue-500 hover:underline">View
 								Details</a>
@@ -82,7 +82,7 @@
 					<!-- Card 2 -->
 					<div class="bg-white p-6 rounded-lg shadow-lg">
 						<h3 class="text-lg font-bold">New Invoices</h3>
-						<p class="text-gray-600 mt-2 text-xl">5</p>
+						<p class="text-gray-600 mt-2 text-xl">{{ .pending }}</p>
 						<div class="mt-4">
 							<a href="#" class="text-blue-500 hover:underline">Manage
 								Invoices</a>
@@ -91,7 +91,7 @@
 					<!-- Card 3 -->
 					<div class="bg-white p-6 rounded-lg shadow-lg">
 						<h3 class="text-lg font-bold">Pending Tasks</h3>
-						<p class="text-gray-600 mt-2 text-xl">8</p>
+						<p class="text-gray-600 mt-2 text-xl">{{ .approved }}</p>
 						<div class="mt-4">
 							<a href="#" class="text-blue-500 hover:underline">Check
 								Tasks</a>
@@ -108,28 +108,29 @@
 						<thead>
 							<tr>
 								<th class="px-4 py-2">Client</th>
+								<th class="px-4 py-2">Email</th>
 								<th class="px-4 py-2">Project</th>
+								<th class="px-4 py-2">Package</th>
 								<th class="px-4 py-2">Status</th>
 								<th class="px-4 py-2">Date</th>
 							</tr>
 						</thead>
 						<tbody>
+							{{ range .orders }}
 							<tr>
-								<td class="border-t px-4 py-2">Client 1</td>
+								<td class="border-t px-4 py-2">{{ .Customer.Fname }} {{
+									.Customer.Lname }}
+								</td>
+								<td class="border-t px-4 py-2">{{ .Customer.Email }}
+								</td>
 								<td class="border-t px-4 py-2">Website Design</td>
+								<td class="border-t px-4 py-2">{{ .PackageName }}
 								<td class="border-t px-4 py-2"><span
 										class="bg-green-100 text-green-800 py-1 px-3 rounded-full text-sm">Completed</span>
 								</td>
-								<td class="border-t px-4 py-2">Sep 19, 2024</td>
+								<td class="border-t px-4 py-2">{{ .CreatedAt }}</td>
 							</tr>
-							<tr>
-								<td class="border-t px-4 py-2">Client 2</td>
-								<td class="border-t px-4 py-2">Mobile App</td>
-								<td class="border-t px-4 py-2"><span
-										class="bg-yellow-100 text-yellow-800 py-1 px-3 rounded-full text-sm">Pending</span>
-								</td>
-								<td class="border-t px-4 py-2">Sep 18, 2024</td>
-							</tr>
+							{{ end }}
 							<!-- Add more rows as necessary -->
 						</tbody>
 					</table>

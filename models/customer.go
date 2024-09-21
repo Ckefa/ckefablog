@@ -5,7 +5,7 @@ import (
 )
 
 type Customer struct {
-	ID        string    `gorm:"type:varchar(50)" json:"id"` // Use string with primary key
+	ID        string    `gorm:"type:varchar(50);primaryKey" json:"id"` // Use string with primary key
 	Email     string    `gorm:"unique" json:"email"`
 	Fname     string    `json:"fname"`
 	Lname     string    `json:"lname"`

@@ -8,38 +8,43 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Order Status</title>
 
+	<!-- Favicon -->
+	<link rel="icon" type="image/png" href="/main/ckefa.jpg">
+
 	{{ template "tailwind" . }}
 </head>
 
 <body class="bg-gray-100">
-	<div class="min-h-screen flex items-center justify-center">
+	{{ template "nav" . }}
+
+	<div class="mt-0 flex mt-8 tems-center justify-center">
 		<div class="bg-white shadow-md rounded-lg p-8 max-w-md w-full">
 			<h1 class="text-2xl font-bold text-gray-800 mb-4">Order Status</h1>
 
 			<div class="mb-4">
 				<h2 class="text-lg font-semibold text-gray-600">Order ID:</h2>
-				<p class="text-gray-800">{{ .ID }}</p>
+				<p class="text-gray-800">{{ .order.ID }}</p>
 			</div>
 
 			<div class="mb-4">
 				<h2 class="text-lg font-semibold text-gray-600">Package:</h2>
-				<p class="text-gray-800">Package: {{ .PackageID }} {{ .PackageName }}</p>
+				<p class="text-gray-800">Package: {{ .order.PackageID }} {{ .order.PackageName }}</p>
 			</div>
 
 			<div class="mb-4">
 				<h2 class="text-lg font-semibold text-gray-600">Amount:</h2>
-				<p class="text-gray-800">{{ .Amount }} USD</p>
+				<p class="text-gray-800">{{ .order.Amount }} USD</p>
 			</div>
 
 			<div class="mb-4">
 				<h2 class="text-lg font-semibold text-gray-600">Payment ID:</h2>
-				<p class="text-gray-800">{{ .PayId }}</p>
+				<p class="text-gray-800">{{ .order.PayId }}</p>
 			</div>
 
 			<div class="mb-4">
 				<h2 class="text-lg font-semibold text-gray-600">Status:</h2>
 				<p class="text-gray-800">
-					{{ if .Status }}
+					{{ if .order.Status }}
 					<span class="text-green-500 font-semibold">Approved</span>
 					{{ else }}
 					<span class="text-red-500 font-semibold">Pending</span>
@@ -50,10 +55,10 @@
 
 			<div class="mb-4">
 				<h2 class="text-lg font-semibold text-gray-600">Status Message:</h2>
-				<p class="text-gray-800">{{ .StatusMsg }}</p>
+				<p class="text-gray-800">{{ .order.StatusMsg }}</p>
 			</div>
 
-			{{ if not .Status }}
+			{{ if not .order.Status }}
 			<div class="mb-4">
 				<h2 class="text-2xl font-semibold text-gray-600">Complete Order:</h2>
 				<ul class="list-disc ml-5">

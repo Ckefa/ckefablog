@@ -32,12 +32,16 @@ func Checkout(c echo.Context) error {
 }
 
 func RequestOrder(c echo.Context) error {
+	sess, _ := session.Get("session", c)
+	userID, _ := sess.Values["user_id"].(string)
 	amt := c.FormValue("amount")
-	log.Println("Paying $", amt)
+
 	amt_float, err := strconv.ParseFloat(amt, 64)
 	pid := models.GetPid(amt_float)
 
-	order := models.NewOrder(amt, pid)
+	log.Println("Paying $", amt_float)
+
+	order := models.NewOrder(string(userID), pid, amt)
 	err = paypal.CreateOrder(order)
 	if err != nil {
 		return c.String(http.StatusAccepted, "error making payment")
@@ -114,10 +118,21 @@ func ConfirmOrder(c echo.Context) error {
 	if orderStatus.Status == "APPROVED" {
 		order.Status = true
 		order.StatusMsg = orderStatus.Status
-		db.DB.Save(order)
+		db.DB.Save(&order)
 	}
 
-	return c.Render(200, "order_status", order)
+	user := map[string]interface{}{
+		"name":  cust.Fname,
+		"email": cust.Email,
+		"subs":  cust.PackageID,
+	}
+
+	respData := map[string]interface{}{
+		"user":  user,
+		"order": order,
+	}
+
+	return c.Render(200, "order_status", respData)
 }
 
 func CancelOrder(c echo.Context) error {
