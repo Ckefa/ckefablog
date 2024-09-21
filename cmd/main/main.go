@@ -61,6 +61,7 @@ func main() {
 
 	e.GET("/", handlers.HandleHome)
 	e.GET("/blog", handlers.HandleIndex)
+	e.GET("/admin", handlers.Admin)
 
 	e.POST("/subscribe", handlers.Subscribe)
 	e.POST("/login", handlers.Login)

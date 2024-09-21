@@ -1,0 +1,144 @@
+{{ define "admin" }}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>CkefaWeb Admin Dashboard</title>
+
+	{{ template "tailwind" }}
+</head>
+
+<body class="bg-gray-100">
+
+	<!-- Sidebar -->
+	<div class="flex h-screen">
+		<aside class="w-64 bg-gray-800 text-white">
+			<div class="py-6 px-4">
+				<h1 class="text-3xl font-bold text-center mb-6">CkefaWeb</h1>
+				<ul>
+					<li class="mb-4">
+						<a href="#" class="flex items-center p-3 hover:bg-gray-700 rounded-lg">
+							<svg xmlns="http://www.w3.org/2000/svg" fill="none"
+								viewBox="0 0 24 24" stroke-width="2"
+								stroke="currentColor" class="w-6 h-6 mr-2">
+								<path stroke-linecap="round" stroke-linejoin="round"
+									d="M11 17l-5-5m0 0l5-5m-5 5h12" />
+							</svg>
+							<span>Dashboard</span>
+						</a>
+					</li>
+					<li class="mb-4">
+						<a href="#" class="flex items-center p-3 hover:bg-gray-700 rounded-lg">
+							<svg xmlns="http://www.w3.org/2000/svg" fill="none"
+								viewBox="0 0 24 24" stroke-width="2"
+								stroke="currentColor" class="w-6 h-6 mr-2">
+								<path stroke-linecap="round" stroke-linejoin="round"
+									d="M16 7l-6 6m0 0l6 6m-6-6h12" />
+							</svg>
+							<span>Projects</span>
+						</a>
+					</li>
+					<li class="mb-4">
+						<a href="#" class="flex items-center p-3 hover:bg-gray-700 rounded-lg">
+							<svg xmlns="http://www.w3.org/2000/svg" fill="none"
+								viewBox="0 0 24 24" stroke-width="2"
+								stroke="currentColor" class="w-6 h-6 mr-2">
+								<path stroke-linecap="round" stroke-linejoin="round"
+									d="M4 6h16M4 10h16m-7 4h7" />
+							</svg>
+							<span>Invoices</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+
+		<!-- Main Content -->
+		<div class="flex-1 p-6">
+			<!-- Top Navigation -->
+			<header class="flex justify-between items-center bg-white py-4 px-6 shadow">
+				<h2 class="text-2xl font-semibold">Admin Dashboard</h2>
+				<div>
+					<input type="text" placeholder="Search..."
+						class="border rounded-lg py-2 px-4 text-gray-800">
+					<button class="bg-blue-500 text-white px-4 py-2 rounded-lg">Search</button>
+				</div>
+			</header>
+
+			<!-- Dashboard Overview Section -->
+			<section class="mt-8">
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+					<!-- Card 1 -->
+					<div class="bg-white p-6 rounded-lg shadow-lg">
+						<h3 class="text-lg font-bold">Total Projects</h3>
+						<p class="text-gray-600 mt-2 text-xl">23</p>
+						<div class="mt-4">
+							<a href="#" class="text-blue-500 hover:underline">View
+								Details</a>
+						</div>
+					</div>
+					<!-- Card 2 -->
+					<div class="bg-white p-6 rounded-lg shadow-lg">
+						<h3 class="text-lg font-bold">New Invoices</h3>
+						<p class="text-gray-600 mt-2 text-xl">5</p>
+						<div class="mt-4">
+							<a href="#" class="text-blue-500 hover:underline">Manage
+								Invoices</a>
+						</div>
+					</div>
+					<!-- Card 3 -->
+					<div class="bg-white p-6 rounded-lg shadow-lg">
+						<h3 class="text-lg font-bold">Pending Tasks</h3>
+						<p class="text-gray-600 mt-2 text-xl">8</p>
+						<div class="mt-4">
+							<a href="#" class="text-blue-500 hover:underline">Check
+								Tasks</a>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Recent Activity -->
+			<section class="mt-12">
+				<h3 class="text-xl font-bold mb-6">Recent Activity</h3>
+				<div class="bg-white p-6 rounded-lg shadow-lg">
+					<table class="w-full text-left">
+						<thead>
+							<tr>
+								<th class="px-4 py-2">Client</th>
+								<th class="px-4 py-2">Project</th>
+								<th class="px-4 py-2">Status</th>
+								<th class="px-4 py-2">Date</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="border-t px-4 py-2">Client 1</td>
+								<td class="border-t px-4 py-2">Website Design</td>
+								<td class="border-t px-4 py-2"><span
+										class="bg-green-100 text-green-800 py-1 px-3 rounded-full text-sm">Completed</span>
+								</td>
+								<td class="border-t px-4 py-2">Sep 19, 2024</td>
+							</tr>
+							<tr>
+								<td class="border-t px-4 py-2">Client 2</td>
+								<td class="border-t px-4 py-2">Mobile App</td>
+								<td class="border-t px-4 py-2"><span
+										class="bg-yellow-100 text-yellow-800 py-1 px-3 rounded-full text-sm">Pending</span>
+								</td>
+								<td class="border-t px-4 py-2">Sep 18, 2024</td>
+							</tr>
+							<!-- Add more rows as necessary -->
+						</tbody>
+					</table>
+				</div>
+			</section>
+		</div>
+	</div>
+
+</body>
+
+</html>
+{{ end }}

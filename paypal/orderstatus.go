@@ -16,6 +16,7 @@ type OrderResponse struct {
 func CheckOrderStatus(payID string) OrderResponse {
 	// Set up the URL for the PayPal order
 	url := fmt.Sprintf("%s/v2/checkout/orders/%s", Url, payID)
+	authtoken := GetAuthToken()
 
 	// Create a new HTTP request
 	req, err := http.NewRequest("GET", url, nil)
@@ -25,7 +26,7 @@ func CheckOrderStatus(payID string) OrderResponse {
 
 	// Set required headers
 	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("Authorization", "Bearer "+AuthToken.Token)
+	req.Header.Set("Authorization", "Bearer "+authtoken)
 
 	// Send the request
 	client := &http.Client{}

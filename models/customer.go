@@ -2,18 +2,17 @@ package models
 
 import (
 	"github.com/google/uuid"
-	"gorm.io/gorm"
 )
 
 type Customer struct {
-	gorm.Model
-	ID        string  `json:"id"`
-	Email     string  `gorm:"unique" json:"email"`
-	Fname     string  `json:"fname"`
-	Lname     string  `json:"lname"`
-	Passwd    string  `json:"passwd"`
-	PackageID int64   `json:"package_id"`
-	Package   Package `gorm:"foreignKey:PackageID"`
+	ID        string    `gorm:"type:varchar(50)" json:"id"` // Use string with primary key
+	Email     string    `gorm:"unique" json:"email"`
+	Fname     string    `json:"fname"`
+	Lname     string    `json:"lname"`
+	Passwd    string    `json:"passwd"`
+	PackageID int64     `json:"package_id"`
+	Package   Package   `gorm:"foreignKey:PackageID"`
+	Messages  []Message `gorm:"foreignKey:CustomerID" json:"messages"` // Foreign key properly linked
 }
 
 func NewCustomer(fname string, lname string, email string, passwd string) *Customer {
@@ -24,5 +23,6 @@ func NewCustomer(fname string, lname string, email string, passwd string) *Custo
 		Email:     email,
 		Passwd:    passwd,
 		PackageID: 1,
+		Messages:  []Message{},
 	}
 }

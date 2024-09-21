@@ -27,12 +27,12 @@ type Order struct {
 func NewOrder(amt string, pid int64) *Order {
 	amount, err := strconv.ParseFloat(amt, 64)
 	if err != nil {
-		log.Println("Error converting amount", err)
+		log.Println("<< func: NewOrder  - Error converting amount", err)
 	}
 	return &Order{
 		ID:          uuid.New().String(),
 		PackageID:   pid,
-		PackageName: Packages[pid].Name,
+		PackageName: Packages[pid-1].Name,
 		Amount:      fmt.Sprintf("%.2f", amount),
 		Status:      false,
 	}

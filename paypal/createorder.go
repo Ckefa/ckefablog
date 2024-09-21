@@ -31,10 +31,12 @@ type Link struct {
 var OrderStatus OrderSt
 
 func CreateOrder(order *models.Order) error {
+	authtoken := GetAuthToken()
+
 	// Define the headers
 	headers := map[string]string{
 		"Content-Type":  "application/json",
-		"Authorization": "Bearer " + AuthToken.Token,
+		"Authorization": "Bearer " + authtoken,
 	}
 
 	// Define the JSON payload
@@ -127,24 +129,4 @@ func CreateOrder(order *models.Order) error {
 	order.Link2 = OrderStatus.Links[1].Href
 
 	return nil
-
-	// sample := map[string]interface{}{
-	// 	"id":     "65037881M3452232B",
-	// 	"status": "PAYER_ACTION_REQUIRED",
-	// 	"payment_source": [string]interface{}{
-	// 		"paypal": map[string]interface{}{},
-	// 	},
-	// 	"links": []map[string]interface{}{
-	// 		{
-	// 			"href":   "https://api.sandbox.paypal.com/v2/checkout/orders/65037881M3452232B",
-	// 			"rel":    "self",
-	// 			"method": "GET",
-	// 		},
-	// 		{
-	// 			"href":   "https://www.sandbox.paypal.com/checkoutnow?token=65037881M3452232B",
-	// 			"rel":    "payer-action",
-	// 			"method": "GET",
-	// 		},
-	// 	},
-	// }
 }

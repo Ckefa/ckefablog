@@ -38,7 +38,9 @@ func Init() error {
 	}
 
 	// Auto-migrate models
-	err = DB.AutoMigrate(&models.User{}, &models.Customer{}, &models.Package{}, &models.Order{})
+	err = DB.AutoMigrate(&models.User{}, &models.Customer{},
+		&models.Package{}, &models.Order{},
+		&models.Message{})
 	if err != nil {
 		log.Println("Migration Error:", err)
 		return err
