@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/base64"
 	"encoding/json"
+	"errors"
 	"io"
 	"log"
 	"net/http"
@@ -33,8 +34,10 @@ var (
 	authFile     = ".auth"
 )
 
+const tokenExpiryBuffer = 30 * time.Second // Buffer to handle potential clock skew
+
 // InitPayment initializes the PayPal token by loading it or generating a new one.
-func InitPayment() {
+func InitPayment() error {
 	Mode = os.Getenv("Mode")
 
 	if Mode == "sandbox" {
@@ -47,31 +50,36 @@ func InitPayment() {
 		clientsecret = os.Getenv("LiveClientSecret")
 	}
 
-	if Url == "" {
-		log.Println("Paypal URL not configured")
-		return
+	// Check required environment variables
+	if Url == "" || clientid == "" || clientsecret == "" {
+		return errors.New("PayPal URL, Client ID or Client Secret is not configured")
 	}
 
 	if err := LoadAuthToken(); err != nil {
 		log.Println("Error loading auth token:", err)
-		GenerateToken()
-	} else if authToken.Token == "" || time.Now().After(tokenExpiry) {
-		GenerateToken()
+		return GenerateToken() // Generate token on load failure
 	}
+
+	// Refresh token if it's expired or close to expiring
+	if authToken.Token == "" || time.Now().Add(tokenExpiryBuffer).After(tokenExpiry) {
+		return GenerateToken()
+	}
+
+	return nil
 }
 
 // GetAuthToken returns a valid access token.
-func GetAuthToken() string {
+func GetAuthToken() (string, error) {
 	mu.Lock()
 	defer mu.Unlock()
 
-	if authToken.Token == "" || time.Now().After(tokenExpiry) {
-		GenerateToken() // Refresh the token
-	} else {
-		log.Println("Using existing access token:", authToken.Token)
+	if authToken.Token == "" || time.Now().Add(tokenExpiryBuffer).After(tokenExpiry) {
+		if err := GenerateToken(); err != nil {
+			return "", err // Return error if token generation fails
+		}
 	}
 
-	return authToken.Token
+	return authToken.Token, nil
 }
 
 // LoadAuthToken reads the token and expiry from the .auth file.
@@ -79,7 +87,7 @@ func LoadAuthToken() error {
 	file, err := os.Open(authFile)
 	if err != nil {
 		if os.IsNotExist(err) {
-			return nil
+			return nil // No error if the file does not exist yet
 		}
 		return err
 	}
@@ -97,8 +105,7 @@ func LoadAuthToken() error {
 	authToken.Token = tokenData.Token
 	tokenExpiry = time.Unix(tokenData.ExpiresAt, 0)
 
-	log.Println("Loading existing access token:", authToken.Token)
-
+	log.Println("Loaded existing access token:", authToken.Token)
 	return nil
 }
 
@@ -117,66 +124,78 @@ func SaveAuthToken() error {
 		Token:     authToken.Token,
 		ExpiresAt: tokenExpiry.Unix(),
 	}
+
 	return json.NewEncoder(file).Encode(tokenData)
 }
 
-// GenerateToken fetches a new PayPal access token.
-func GenerateToken() {
+// GenerateToken fetches a new PayPal access token and retries on failure with exponential backoff.
+func GenerateToken() error {
 	log.Println("<< Generating new AccessToken >>")
 
 	mu.Lock()
 	defer mu.Unlock()
 
-	// Create basic authentication header
+	var attempt int
+	maxRetries := 3
+	delay := 1 * time.Second
+
+	for attempt = 0; attempt < maxRetries; attempt++ {
+		err := generateNewToken()
+		if err == nil {
+			return nil // Token generated successfully
+		}
+
+		log.Printf("Error generating token, retrying in %s: %v", delay, err)
+		time.Sleep(delay)
+		delay *= 2 // Exponential backoff
+	}
+
+	return errors.New("failed to generate access token after retries")
+}
+
+// generateNewToken sends the request to fetch a new access token.
+func generateNewToken() error {
 	auth := base64.StdEncoding.EncodeToString([]byte(clientid + ":" + clientsecret))
 
-	// Prepare the form data
 	form := url.Values{}
 	form.Add("grant_type", "client_credentials")
 
-	// Create the HTTP request
 	req, err := http.NewRequest("POST", Url+"/v1/oauth2/token", bytes.NewBufferString(form.Encode()))
 	if err != nil {
-		log.Fatalf("Error creating request: %v", err)
-		return
+		return err
 	}
 
-	// Set headers
 	req.Header.Set("Authorization", "Basic "+auth)
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 
-	// Set HTTP client with timeout
-	client := &http.Client{
-		Timeout: 10 * time.Second,
-	}
+	client := &http.Client{Timeout: 10 * time.Second}
 	resp, err := client.Do(req)
 	if err != nil {
-		log.Fatalf("Error sending request: %v", err)
-		return
+		return err
 	}
 	defer resp.Body.Close()
 
-	// Read and unmarshal response
+	if resp.StatusCode != http.StatusOK {
+		return errors.New("failed to get token: " + resp.Status)
+	}
+
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
-		log.Fatalf("Error reading response: %v", err)
-		return
+		return err
 	}
 
-	// Unmarshal the response into the AuthToken struct
 	if err := json.Unmarshal(body, &authToken); err != nil {
-		log.Fatalf("Error unmarshaling response: %v", err)
-		return
+		return err
 	}
 
-	// Set token expiry time
 	tokenExpiry = time.Now().Add(time.Duration(authToken.ExpiresIn) * time.Second)
 
-	// Save the token to the file
 	if err := SaveAuthToken(); err != nil {
 		log.Println("Error saving auth token:", err)
 	}
 
 	log.Printf("Access token obtained: %s", authToken.Token)
 	log.Printf("Token expires at: %v", tokenExpiry)
+
+	return nil
 }

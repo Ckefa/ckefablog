@@ -31,7 +31,7 @@ type Link struct {
 var OrderStatus OrderSt
 
 func CreateOrder(order *models.Order) error {
-	authtoken := GetAuthToken()
+	authtoken, _ := GetAuthToken()
 
 	// Define the headers
 	headers := map[string]string{

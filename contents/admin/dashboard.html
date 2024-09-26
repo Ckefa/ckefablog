@@ -7,6 +7,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>CkefaWeb Admin Dashboard</title>
 
+	<!-- Favicon -->
+	<link rel="icon" type="image/png" href="/main/ckefa.jpg">
+
 	{{ template "tailwind" }}
 </head>
 
@@ -14,7 +17,7 @@
 
 	<!-- Sidebar -->
 	<div class="flex h-screen">
-		<aside class="w-64 bg-gray-800 text-white">
+		<aside class="w-56 bg-gray-800 text-white">
 			<div class="py-6 px-4">
 				<h1 class="text-3xl font-bold text-center mb-6">CkefaWeb</h1>
 				<ul>
@@ -109,6 +112,7 @@
 							<tr>
 								<th class="px-4 py-2">Client</th>
 								<th class="px-4 py-2">Email</th>
+								<th class="px-4 py-2">Messages</th>
 								<th class="px-4 py-2">Project</th>
 								<th class="px-4 py-2">Package</th>
 								<th class="px-4 py-2">Status</th>
@@ -122,6 +126,9 @@
 									.Customer.Lname }}
 								</td>
 								<td class="border-t px-4 py-2">{{ .Customer.Email }}
+								</td>
+								<td class="border-t px-4 py-2 font-bold">
+									<span class="text-red-500">0</span>
 								</td>
 								<td class="border-t px-4 py-2">Website Design</td>
 								<td class="border-t px-4 py-2">{{ .PackageName }}
