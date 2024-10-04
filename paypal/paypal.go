@@ -74,7 +74,7 @@ func GetAuthToken() (string, error) {
 	defer mu.Unlock()
 
 	if authToken.Token == "" || time.Now().Add(tokenExpiryBuffer).After(tokenExpiry) {
-		if err := InitPayment(); err != nil {
+		if err := GenerateToken(); err != nil {
 			return "", err // Return error if token generation fails
 		}
 	}
