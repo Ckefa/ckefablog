@@ -3,8 +3,8 @@ Description=Ckefa.com blog website service
 After=network.target
 
 [Service]
-User=www-data
-Group=www-data
+User=root
+Group=root
 WorkingDirectory=/apps/ckefablog/
 ExecStart=/apps/ckefablog/bin/app
 StandardOutput=append:/var/log/ckefablog.log
